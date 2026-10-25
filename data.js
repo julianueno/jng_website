@@ -60,7 +60,7 @@ window.SITE = {
       id: 'impluvium', lane: 'projects', t: 2021.5,
       title: 'Impluvium', when: '2021', with: 'with Javier Moreno',
       text: 'Second prize in Barcelona’s SuperBlock design contest. Like an archaeological excavation of Cerdà’s Eixample, the proposal removes the current pavement to give a second opportunity to the old cobblestones, the natural substrate, water and roots.',
-      imgNote: 'section: cobblestones, substrate, roots',
+      img: 'images/impluvium.png',
       links: [{ label: 'Competition entries (PDF)', url: 'https://ajuntament.barcelona.cat/superilles/sites/default/files/projectes_places_lot2.pdf' }],
       rel: ['energy']
     },
@@ -174,7 +174,7 @@ window.SITE = {
       rel: []
     },
     {
-      id: 'cartography', lane: 'tools', t: 2024.75,
+      id: 'cartography', lane: 'tools', t: 2024.9,
       title: 'A Cartography of Genocide', when: '2024', with: 'Forensic Architecture',
       text: 'Documentation and analysis of Israel’s military conduct in Gaza.',
       img: 'images/cartography.jpg',
@@ -315,14 +315,6 @@ window.SITE = {
       rel: []
     },
     {
-      id: 'lcc', lane: 'writing', t: 2023.08,
-      title: 'Guest Lecture, MA Interaction Design', when: 'Jan 2023', with: 'London College of Communication',
-      text: 'Guest lecture.',
-      imgNote: 'lecture slide',
-      links: [],
-      rel: []
-    },
-    {
       id: 'arte-activismo', lane: 'writing', t: 2023.28,
       title: 'Arte y activismo digital', when: 'Apr 2023', with: 'Interview with Victor Balcells',
       text: 'Conversation with the author of Discotecas por fuera (Anagrama, 2022) on digital activism.',
@@ -362,14 +354,14 @@ window.SITE = {
       id: 'militant', lane: 'writing', t: 2024.27,
       title: 'Digital Autonomía', when: 'Apr 2024', with: 'Militant Media · CRA Books, Spector Books',
       text: 'Book chapter.',
-      imgNote: 'book cover',
+      img: 'images/militant.png',
       links: [{ label: 'Book', url: 'https://www.spectorbooks.com/book/militant-media' }],
       rel: ['riding']
     },
     {
       id: 'dai', lane: 'writing', t: 2024.3,
-      title: 'Humanitarian Violence in Gaza: Open Source Methodologies', when: 'Apr 2024', with: 'Dutch Art Institute, Palestine Teach-Out',
-      text: 'Tutor. Open-source methodologies and tools for investigating Israel’s military campaign.',
+      title: 'Pattenrs of Destruction. Digital tools to investigate the genocide in Gaza', when: 'Apr 2024', with: 'Princeton Universty McGill Dutch Art Institute  ',
+      text: '',
       imgNote: 'teach-out session',
       links: [{ label: 'Programme', url: 'https://dutchartinstitute.eu/page/21146/2023---2024-palestine-teach-outs-saturday-20-april' }],
       rel: []
@@ -386,18 +378,18 @@ window.SITE = {
       id: 'vida', lane: 'writing', t: 2024.46,
       title: 'La vida corpórea de los datos', when: 'Jun 2024', with: 'Concreta nº 23',
       text: 'Text in “La composición activa de la presencia”.',
-      imgNote: 'journal spread',
+      img: 'images/corporea.png',
       links: [{ label: 'Issue', url: 'https://www.editorialconcreta.org/-Concreta-23-La-composicion-activa-' }],
       rel: ['riding']
     },
-    {
-      id: 'recursive', lane: 'writing', t: 2024.7,
-      title: 'Recursive Violence', when: 'Sep 2024', with: 'Institute for Postnatural Studies',
-      text: 'Public talk.',
-      imgNote: 'talk',
-      links: [],
-      rel: []
-    },
+    // {
+    //   id: 'recursive', lane: 'writing', t: 2024.7,
+    //   title: 'Recursive Violence', when: 'Sep 2024', with: 'Institute for Postnatural Studies',
+    //   text: 'Public talk.',
+    //   imgNote: 'talk',
+    //   links: [],
+    //   rel: []
+    // },
     {
       id: 'chisme', lane: 'writing', t: 2024.77,
       title: 'El chisme algorítmico', when: 'Oct 2024', with: 'Blog Arquia',
@@ -453,6 +445,5 @@ window.SITE = {
       text: 'This seminar explores sensing as a political and contested practice of knowledge production. Perception is never neutral: infrastructures and techniques determine what is made visible or remains hidden, which claims are amplified or dismissed, whose lives are recognized, and which futures become imaginable. Sensing is thus inseparable from questions of access, recognition, and power.',
       img: 'images/simulation.png'
     }
-
   ]
 };
