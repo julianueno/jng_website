@@ -327,7 +327,11 @@
   }
 
   /* ---------- fold / unfold ---------- */
+  // on phones the index stays folded: projects can be scrolled to, but not opened
+  var phoneMQ = window.matchMedia ? window.matchMedia('(max-width: 860px)') : null;
+  function isPhone() { return !!(phoneMQ && phoneMQ.matches); }
   function openEntry(id, instantFold) {
+    if (isPhone()) return 0;
     if (state.open === id) return 0;
     var el = document.getElementById('w-' + id);
     if (!el) return 0;
@@ -535,7 +539,7 @@
     // choosing a path also folds About, like opening a project
     if (aboutOpen && t.closest('[data-path]')) foldAbout(false);
     var tg = t.closest('[data-toggle]');
-    if (tg) { toggleEntry(tg.dataset.toggle); return; }
+    if (tg) { if (!isPhone()) toggleEntry(tg.dataset.toggle); return; }
     var pl = t.closest('[data-play]');
     if (pl) { playVideo(pl.dataset.play); return; }
     var pa = t.closest('[data-path]');
@@ -572,7 +576,7 @@
 
   $scroller.addEventListener('scroll', onScroll, { passive: true });
   var resizeT;
-  window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { drawPath(); sync(); if (state.open) fitPanel(document.getElementById('w-' + state.open)); }, 80); });
+  window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { if (isPhone() && state.open) closeEntry(); drawPath(); sync(); if (state.open) fitPanel(document.getElementById('w-' + state.open)); }, 80); });
 
   /* ---------- init ---------- */
   buildTimeline();

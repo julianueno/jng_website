@@ -36,7 +36,7 @@ window.SITE = {
     { id: 'commons', label: 'data commons', ids: ['unionism', 'rts', 'riding', 'engines', 'osmp', 'militant', 'vida', 'chisme'] },
     { id: 'forensic', label: 'forensic', ids: ['medical', 'humviol', 'attacks-aid', 'cartography', 'starvation', 'genocidios'] },
     { id: 'ai-warfare', label: 'AI warfare', ids: ['waiting', 'hidden-casualties', 'taiba', 'shahed', 'thesis', 'humviol', 'patterns', 'recursive', 'target', 'cuadricula', 'genocidios'] },
-    { id: 'infrastructure', label: 'infrastructure', ids: ['energy', 'impluvium'] }
+    { id: 'infrastructure', label: 'infrastructure', ids: ['energy', 'impluvium', 'rts', 'landlord', 'anyplace'] }
 
   ],
 
@@ -101,7 +101,7 @@ window.SITE = {
       id: 'shahed', lane: 'projects', t: 2023.6,
       title: 'A Year of the Shahed', when: '2023', with: 'Airwars & Der Spiegel',
       text: 'How Iranian drones changed automated warfare in Ukraine. Winner of a Sigma Award for data journalism.',
-      img: 'images/shahed.jpg',
+      img: 'images/shahed.png',
       imgNote: 'drone strike map, Ukraine',
       links: [
         { label: 'Investigation', url: 'https://airwars.org/investigation/shahed-year-russia-ukraine-iran/' },
@@ -122,7 +122,7 @@ window.SITE = {
       id: 'humviol', lane: 'projects', t: 2024.15,
       title: 'Humanitarian Violence in Gaza', when: '2024', with: 'Forensic Architecture',
       text: 'Documentation and analysis of Israel’s military campaign turning principles of humanitarianism into weapons deployed against a civilian population in Gaza.',
-      img: 'images/humviol.jpg',
+      img: 'images/humviol.png',
       imgNote: 'evacuation grid blocks over Gaza, animated by date',
       links: [{ label: 'Platform', url: 'https://gaza.forensic-architecture.org/' }],
       rel: ['attacks-aid', 'cartography', 'dai']
@@ -218,7 +218,7 @@ window.SITE = {
     {
       id: 'anyplace', lane: 'exhib', t: 2022.6,
       title: 'Qualsevol Lloc / Anyplace', when: '2022', with: 'Arts Santa Mònica · with Noha Mokhtar and Xavier Nueno',
-      text: 'Video installation on the work processes that sustain the reproduction of places and objects where mass tourism meets digital economies. Commissioned by Gema Darbo.',
+      text: 'Video installation on the work processes that sustain the reproduction of places and objects where mass tourism meets digital economies. Curated by Gema Darbo.',
       img: 'images/anyplace.webp',
       video: 'https://vimeo.com/779206214',
       imgNote: 'video still, Mix Fruit',
@@ -231,6 +231,7 @@ window.SITE = {
       text: 'Augmented-reality installation exploring the domestic expressions of Barcelona’s real-estate property structure.',
       video: 'https://drive.google.com/file/d/1knfU-ZSCctGYavLqInATjXH8A7oaAk0S/view',
       img: 'images/landlord.jpg',
+      loop: 'images/landlord-loop.mp4',
       links: [{ label: 'Video of the AR experience', url: 'https://drive.google.com/file/d/1knfU-ZSCctGYavLqInATjXH8A7oaAk0S/view' }],
       rel: []
     },
@@ -271,14 +272,14 @@ window.SITE = {
       links: [{ label: 'CCCB', url: 'https://www.cccb.org/es/actividades/ficha/bivac-2024/246234' }],
       rel: []
     },
-    {
-      id: 'demonstration', lane: 'exhib', t: 2025.45,
-      title: 'The Future of Demonstration', when: '2025', with: 'Atelier Augarten, Vienna',
-      text: 'Hothouse programme.',
-      imgNote: 'installation view',
-      links: [{ label: 'Programme', url: 'https://thefutureofdemonstration.net/hothouse/programme.html' }],
-      rel: ['humviol']
-    },
+    // {
+    //   id: 'demonstration', lane: 'exhib', t: 2025.45,
+    //   title: 'The Future of Demonstration', when: '2025', with: 'Atelier Augarten, Vienna',
+    //   text: 'Hothouse programme.',
+    //   imgNote: 'installation view',
+    //   links: [{ label: 'Programme', url: 'https://thefutureofdemonstration.net/hothouse/programme.html' }],
+    //   rel: ['humviol']
+    // },
     {
       id: 'earthworks', lane: 'exhib', t: 2026.5,
       title: 'Earthworks', when: '2026', with: 'Barcelona · World Congress of Architecture · Co-curation with Eyal Weizman and Lizzie Breiner',
@@ -334,7 +335,7 @@ window.SITE = {
       id: 'thesis', lane: 'writing', t: 2023.75, end: 2027.0,
       title: 'Individuated Mass Killing', when: '2023–', with: 'PhD, Centre for Research Architecture, Goldsmiths',
       text: 'A spatial method for reconstructing the Israeli military target factory in Gaza. In progress.',
-      img: 'images/bombing_campaign.jpg',
+      img: 'images/bombing_campaign.png',
       links: [],
       rel: ['humviol', 'genocidios', 'cartography'],
     },

@@ -390,7 +390,9 @@ a.org:hover { color: var(--accent); }
   .tl-body { margin-top: 10px; }
   .tl-foot { justify-content: flex-end; }
   .name { font-size: 24px; }
-  .entry-head { gap: 10px; padding: 11px 14px 11px 20px; }
+  .entry-head { gap: 10px; padding: 11px 14px 11px 20px; cursor: default; }
+  /* phones only get the folded index: no unfold sign */
+  .plus { display: none; }
   .meta .tag:not(.when-tag) { display: none; }
   .entry-panel > :not(.media) { padding: 0 var(--pad); }
   .about-content { min-height: 0; padding: 16px var(--pad) 18px; }
