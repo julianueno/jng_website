@@ -60,7 +60,7 @@ window.SITE = {
       id: 'impluvium', lane: 'projects', t: 2021.5,
       title: 'Impluvium', when: '2021', with: 'with Javier Moreno',
       text: 'Second prize in Barcelona’s SuperBlock design contest. Like an archaeological excavation of Cerdà’s Eixample, the proposal removes the current pavement to give a second opportunity to the old cobblestones, the natural substrate, water and roots.',
-      img: 'images/impluvium.png',
+      img: 'images/impluvium.jpg',
       links: [{ label: 'Competition entries (PDF)', url: 'https://ajuntament.barcelona.cat/superilles/sites/default/files/projectes_places_lot2.pdf' }],
       rel: ['energy']
     },
@@ -68,7 +68,7 @@ window.SITE = {
       id: 'rts', lane: 'projects', t: 2021.7,
       title: 'Real Time Structure', when: '2021', with: 'Harvard Mellon Urban Initiative · with Xavier Nueno',
       text: 'Departing from Hans Haacke’s Shapolsky et al. Manhattan Real Estate Holdings, a Real-Time Social System, as of May 1, 1971, a mapping of the extent and relations of investment funds in Barcelona’s real-estate property structure.',
-      img: 'images/rts.png',
+      img: 'images/rts.jpg',
       imgNote: 'network of investment funds over Barcelona',
       links: [{ label: 'Project', url: 'https://mellonurbanism.harvard.edu/real-time-property-structure-investment-funds-barcelona' }],
       rel: ['landlord', 'unionism']
@@ -89,7 +89,7 @@ window.SITE = {
       id: 'hidden-casualties', lane: 'projects', t: 2023.2,
       title: 'The Hidden Casualties of Britain’s War', when: '2023', with: 'Airwars & The Guardian',
       text: 'Searching for the victims of UK strikes in Syria and Iraq. The investigation found civilian deaths linked to British airstrikes in Mosul, despite claims that British weapons had not harmed a single non-combatant.',
-      img: 'images/hidden-casualties.png',
+      img: 'images/hidden-casualties.jpg',
       imgNote: 'strike locations, Mosul',
       links: [
         { label: 'Airwars', url: 'https://airwars.org/investigation/britain-uk-civilian-casualties-iraq-syria/' },
@@ -101,7 +101,7 @@ window.SITE = {
       id: 'shahed', lane: 'projects', t: 2023.6,
       title: 'A Year of the Shahed', when: '2023', with: 'Airwars & Der Spiegel',
       text: 'How Iranian drones changed automated warfare in Ukraine. Winner of a Sigma Award for data journalism.',
-      img: 'images/shahed.png',
+      img: 'images/shahed.jpg',
       imgNote: 'drone strike map, Ukraine',
       links: [
         { label: 'Investigation', url: 'https://airwars.org/investigation/shahed-year-russia-ukraine-iran/' },
@@ -113,7 +113,7 @@ window.SITE = {
       id: 'medical', lane: 'projects', t: 2023.92,
       title: 'Destruction of Medical Infrastructure in Gaza', when: '2023', with: 'Forensic Architecture',
       text: 'Analysis of the pattern of attacks on Gaza’s medical infrastructure: intimidation, direct targeting, siege and occupation, rendering Gaza’s hospitals out of service.',
-      img: 'images/medical.png',
+      img: 'images/medical.jpg',
       imgNote: 'hospital compound, before / after',
       links: [{ label: 'Platform', url: 'https://gaza-hospitals.forensic-architecture.org/' }],
       rel: ['humviol']
@@ -122,7 +122,7 @@ window.SITE = {
       id: 'humviol', lane: 'projects', t: 2024.15,
       title: 'Humanitarian Violence in Gaza', when: '2024', with: 'Forensic Architecture',
       text: 'Documentation and analysis of Israel’s military campaign turning principles of humanitarianism into weapons deployed against a civilian population in Gaza.',
-      img: 'images/humviol.png',
+      img: 'images/humviol.jpg',
       imgNote: 'evacuation grid blocks over Gaza, animated by date',
       links: [{ label: 'Platform', url: 'https://gaza.forensic-architecture.org/' }],
       rel: ['attacks-aid', 'cartography', 'dai']
@@ -140,7 +140,7 @@ window.SITE = {
       id: 'starvation', lane: 'projects', t: 2025.4,
       title: 'The Architecture of Genocidal Starvation', when: '2025', with: 'Forensic Architecture',
       text: 'Documentation and analysis of Israel’s military destruction of humanitarian aid in Gaza.',
-      img: 'images/starvation.png',
+      img: 'images/starvation.jpg',
       links: [{ label: 'Investigation', url: 'https://forensic-architecture.org/investigation/aid-in-gaza' }],
       rel: ['cartography', 'genocidios']
     },
@@ -184,9 +184,9 @@ window.SITE = {
     },
     {
       id: 'autopsia', lane: 'tools', t: 2026.4,
-      title: 'Autopsia de una huella de datos', when: 'Junio 2026', with: 'Madrid  · Medialab Matadero · with Lucia Rebolino, curated by Bani Brusadi',
+      title: 'Autopsia de una huella de datos', when: 'Jun 2026', with: 'Madrid  · Medialab Matadero · with Lucia Rebolino, curated by Bani Brusadi',
       text: 'Taller de metodologías contraforenses y desarrollo de platafroma para mapear el Sistema de Vigiliancia Exterior (SIVE). Este sistema de fortificación de la frontera del estado español está compuesto por una red de sensores, cámaras y radares que sirven para identificar la llegada de embarcaciones a las costas. El taller explora el rol de la imagen y la recolección de datos en la violencia migratoria. Nos preguntamos sobre las proyecciones y las fisuras del SIVE y las mobilizamos para cartografiar su infrastructura y investigar sus lógica',
-      img: 'images/autopsia.png'
+      img: 'images/autopsia.jpg'
     },
 
     /* ---------- Exhibitions & film ---------- */
@@ -201,9 +201,9 @@ window.SITE = {
     },
     {
       id: 'fora_de_Si', lane: 'exhib', t: 2026.45,
-      title: 'Fora de Si', when: 'June 2026', with: 'Barcelona · Galeria h3o · with Oriol Arendo  ',
+      title: 'Fora de Si', when: 'Jun 2026', with: 'Barcelona · Galeria h3o · with Oriol Arendo  ',
       text: 'La instal·lació sonora al jardí d’H2O fa sensible allò que ha estat fet invisible. Ens connectem a dues antenes veïnals i a la xarxa de radioaficionats del nostre territori. Hi escoltem allò que no estava destinat a l’oïda: retalls de comunicació funcional, torres de control aeri, emissores a l’altra punta del món que reboten contra una atmosfera carregada per la radiació solar i arriben, accidentalment, fins aquí. L’atmosfera es desvela així no tan sols com a mitjà de transmissió, sinó com a cos viu que modela, transforma i és també el missatge.',
-      img: 'images/fora_de_si.png',
+      img: 'images/fora_de_si.jpg',
     },
     {
       id: 'riding-install', lane: 'exhib', t: 2022.45,
@@ -230,7 +230,7 @@ window.SITE = {
       title: 'Landlord Open-House', when: '2022', with: 'Model Architecture Festival · with Farzin Lotfi-Jam',
       text: 'Augmented-reality installation exploring the domestic expressions of Barcelona’s real-estate property structure.',
       video: 'https://drive.google.com/file/d/1knfU-ZSCctGYavLqInATjXH8A7oaAk0S/view',
-      img: 'images/landlord.png',
+      img: 'images/landlord.jpg',
       links: [{ label: 'Video of the AR experience', url: 'https://drive.google.com/file/d/1knfU-ZSCctGYavLqInATjXH8A7oaAk0S/view' }],
       rel: []
     },
@@ -238,7 +238,7 @@ window.SITE = {
       id: 'waiting-doc', lane: 'exhib', t: 2023.05,
       title: 'Waiting to Happen (documentary)', when: '2023', with: 'Airwars & VICE News',
       text: 'Associate producer on the documentary of Airwars and VICE News’ year-long visual investigation into the failures at a US-backed prison in Syria.',
-      img: 'images/waiting-doc.webp',
+      img: 'images/waiting-doc.jpg',
       imgNote: 'film still',
       links: [{ label: 'Watch', url: 'https://vimeo.com/793836865' }],
       rel: []
@@ -257,7 +257,7 @@ window.SITE = {
       id: 'matadero', lane: 'exhib', t: 2024.3,
       title: 'Sin lo otro la tierra no sería', when: '2024', with: 'Matadero Madrid',
       text: 'Research residency between the Centre for Research Architecture and Intermediae at Matadero, convened by María Buey González.',
-      img: 'images/matadero.png',
+      img: 'images/matadero.jpg',
       imgNote: 'residency view',
       links: [{ label: 'Programme', url: 'https://www.mataderomadrid.org/programacion/sin-lo-otro-la-tierra-no-seria' }],
       rel: []
@@ -316,7 +316,7 @@ window.SITE = {
       title: 'Engines of Inequality', when: 'Jan 2023', with: 'Fabrikzeitung, issue 375 (editor)',
       text: 'Editor of an issue exploring invisible information infrastructures and the digital feedback loops that reproduce inequality.',
       imgNote: 'newspaper cover',
-      img: 'images/engines.png',
+      img: 'images/engines.jpg',
       links: [{ label: 'Issue', url: 'https://www.fabrikzeitung.ch/category/engines-of-inequality/' }],
       rel: []
     },
@@ -334,7 +334,7 @@ window.SITE = {
       id: 'thesis', lane: 'writing', t: 2023.75, end: 2027.0,
       title: 'Individuated Mass Killing', when: '2023–', with: 'PhD, Centre for Research Architecture, Goldsmiths',
       text: 'A spatial method for reconstructing the Israeli military target factory in Gaza. In progress.',
-      img: 'images/bombing_campaign.png',
+      img: 'images/bombing_campaign.jpg',
       links: [],
       rel: ['humviol', 'genocidios', 'cartography'],
     },
@@ -358,7 +358,7 @@ window.SITE = {
       id: 'militant', lane: 'writing', t: 2024.27,
       title: 'Digital Autonomía', when: 'Apr 2024', with: 'Militant Media · CRA Books, Spector Books',
       text: 'Book chapter.',
-      img: 'images/militant.png',
+      img: 'images/militant.jpg',
       links: [{ label: 'Book', url: 'https://www.spectorbooks.com/book/militant-media' }],
       rel: ['riding']
     },
@@ -368,13 +368,6 @@ window.SITE = {
       text: 'Workshops and talks given in different institutions in spring 2024 - autumn 2025, at the invitation of each institution. ',
       imgNote: 'teach-out session',
       rel: ['cartography', 'humviol', 'starvation', 'genocidios']
-    },
-    {
-      id: 'dai', lane: 'exhib', t: 2025.3,
-      title: 'ScreenWalk', when: 'Apr 2024', with: 'P  ',
-      text: 'Workshops and talks given in different institutions in spring 2024, at the invitation of each institution. ',
-      links: [{ label: 'Book', url: 'https://www.spectorbooks.com/book/militant-media' }],
-      rel: ['cartography', 'humviolent', 'starvation', 'genocidios']
     },
     // {
     //   id: 'patterns', lane: 'writing', t: 2024.44,
@@ -388,7 +381,7 @@ window.SITE = {
       id: 'vida', lane: 'writing', t: 2024.46,
       title: 'La vida corpórea de los datos', when: 'Jun 2024', with: 'Concreta nº 23',
       text: 'Text in “La composición activa de la presencia”.',
-      img: 'images/corporea.png',
+      img: 'images/corporea.jpg',
 
       links: [{ label: 'Issue', url: 'https://www.editorialconcreta.org/-Concreta-23-La-composicion-activa-' }],
       rel: ['riding']
@@ -414,7 +407,7 @@ window.SITE = {
       id: 'target', lane: 'writing', t: 2024.79,
       title: 'The Target Factory', when: 'Oct 2024', with: 'Verso Books blog',
       text: 'On Israeli military uses of AI to turn civilian sites into military targets.',
-      img: 'images/target.png',
+      img: 'images/target.jpg',
       imgNote: 'pull quote',
       links: [{ label: 'Read', url: 'https://www.versobooks.com/en-gb/blogs/news/the-target-factory' }],
       rel: ['genocidios']
@@ -423,16 +416,16 @@ window.SITE = {
       id: 'cuadricula', lane: 'writing', t: 2025.77,
       title: 'La cuadrícula de borrado', when: 'Oct 2025', with: 'Archivo Orsini',
       text: 'Essay on the evacuation grid.',
-      img: 'images/cuadricula.png',
+      img: 'images/cuadricula.jpg',
       imgNote: 'grid diagram',
       links: [{ label: 'Read', url: 'https://archivoorsini.com/2025/10/09/la-cuadricula-de-borrado/' }],
       rel: ['genocidios']
     },
     {
       id: 'genocidios', lane: 'writing', t: 2025.8,
-      title: 'Genocidios. Una lectura forense', when: 'Oct 2025', with: 'Editora del volumen · Galaxia Gutenberg',
+      title: 'Genocidios. Una lectura forense', when: 'Oct 2025', with: 'Volume editor · Galaxia Gutenberg',
       text: 'En mayo de 2024, la Fuerza Aérea israelí y la División de Inteligencia recibieron el Premio de Defensa Israelí 2024 por el éxito de su «fábrica de objetivos», que reconocía el uso innovador de «algoritmos avanzados e inteligencia artificial» para identificar blancos humanos. Este libro colectivo incluye un espectro de colaboraciones que analizan esa historia apoyándose en las tecnologías más recientes. Su intención es política: redefinir lo que entendemos por genocidio a la luz de los procesos coloniales y expandir el derecho internacional a partir del caso de Gaza. Para ello reúne voces autorizadas como Rabea Eghbariah, Joshua Abramson, Dima Srouji, Grégoire Chamayou o Marwa Fatatfa. E incluye, además de otros ensayos gráficos, la investigación visual Cartografía de un genocidio, por primera vez en español',
-      img: 'images/genocidios_portada.png',
+      img: 'images/genocidios_portada.jpg',
       links: [{ label: 'Publisher', url: 'https://www.galaxiagutenberg.com/producto/genocidios/' }],
       rel: ['cartography']
     },
@@ -447,14 +440,14 @@ window.SITE = {
       id: 'coloquio', lane: 'writing', t: 2026.35,
       title: 'Anarqueología de los Medios', when: 'Sep 2025', with: 'Bogotá · Plano Negativo',
       text: 'Encuentro académico y de investigación para reflexionar sobre las formas de interacción con las tecnologías y las maneras en que estas transforman la sociedad, el conocimiento y los modos de existencia, a partir de los ejes de investigación de arqueología de los medios, diseño, arte y ciencia.',
-      img: 'images/coloquio_poster.png',
+      img: 'images/coloquio_poster.jpg',
       loop: 'images/coloquio.mp4'
     },
     {
       id: 'degrees', lane: 'writing', t: 2026.39,
       title: '4 degrees of simulation', when: 'Sep 2025', with: 'Institute of Postnatural Studies · Seminar coordinator',
       text: 'This seminar explores sensing as a political and contested practice of knowledge production. Perception is never neutral: infrastructures and techniques determine what is made visible or remains hidden, which claims are amplified or dismissed, whose lives are recognized, and which futures become imaginable. Sensing is thus inseparable from questions of access, recognition, and power.',
-      img: 'images/simulation.png'
+      img: 'images/simulation.jpg'
     }
   ]
 };
