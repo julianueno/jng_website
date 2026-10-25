@@ -102,7 +102,8 @@
     } else if (poster) {
       inner = '<img class="still' + (contain ? ' contain' : '') + '" src="' + esc(poster) + '" alt="' + alt + '" loading="lazy">';
     } else {
-      return '<div class="ph">' + alt + '</div>';
+      // no image yet: show nothing rather than a placeholder box
+      return '';
     }
     var badge = '';
     if (v && live) {

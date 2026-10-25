@@ -200,6 +200,12 @@ window.SITE = {
       rel: ['unionism']
     },
     {
+      id: 'fora_de_Si', lane: 'exhib', t: 2026.45,
+      title: 'Fora de Si', when: 'June 2026', with: 'Barcelona · Galeria h3o · with Oriol Arendo  ',
+      text: 'La instal·lació sonora al jardí d’H2O fa sensible allò que ha estat fet invisible. Ens connectem a dues antenes veïnals i a la xarxa de radioaficionats del nostre territori. Hi escoltem allò que no estava destinat a l’oïda: retalls de comunicació funcional, torres de control aeri, emissores a l’altra punta del món que reboten contra una atmosfera carregada per la radiació solar i arriben, accidentalment, fins aquí. L’atmosfera es desvela així no tan sols com a mitjà de transmissió, sinó com a cos viu que modela, transforma i és també el missatge.',
+      img: 'images/fora_de_si.png',
+    },
+    {
       id: 'riding-install', lane: 'exhib', t: 2022.45,
       title: 'Riding the Algorithm (installation)', when: '2022', with: 'St James Hatcham Gallery, London',
       text: 'MA exhibition. Video installation on the role of data and embodied knowledge in delivery work.',
@@ -251,7 +257,7 @@ window.SITE = {
       id: 'matadero', lane: 'exhib', t: 2024.3,
       title: 'Sin lo otro la tierra no sería', when: '2024', with: 'Matadero Madrid',
       text: 'Research residency between the Centre for Research Architecture and Intermediae at Matadero, convened by María Buey González.',
-      img: 'images/matadero.jpg',
+      img: 'images/matadero.png',
       imgNote: 'residency view',
       links: [{ label: 'Programme', url: 'https://www.mataderomadrid.org/programacion/sin-lo-otro-la-tierra-no-seria' }],
       rel: []
@@ -336,8 +342,6 @@ window.SITE = {
       id: 'challenging', lane: 'writing', t: 2024.17,
       title: 'Panel at Challenging the Visual', when: 'Mar 2024', with: 'Universitat Pompeu Fabra',
       text: 'Presentation of ongoing work on patterns of attacks in Gaza, truth, documentation and evidence.',
-      img: 'images/challenging.png',
-      fit: 'contain',
       imgNote: 'conference slide',
       links: [{ label: 'Programme', url: 'https://eventum.upf.edu/108914/programme/challenging-the-visual-distrust-emergency-uncertainty-ii-international-conference-visual-motifs-in-.html' }],
       rel: ['humviol']
@@ -359,26 +363,33 @@ window.SITE = {
       rel: ['riding']
     },
     {
-      id: 'dai', lane: 'writing', t: 2024.3,
-      title: 'Pattenrs of Destruction. Digital tools to investigate the genocide in Gaza', when: 'Apr 2024', with: 'Princeton Universty McGill Dutch Art Institute  ',
-      text: '',
+      id: 'dai', lane: 'writing', t: 2025.3,
+      title: 'Patterns of Destruction. Digital tools to investigate the genocide in Gaza', when: 'Apr 2024', with: 'Princeton Universty · McGill University · ETH Dutch Art Institute  ',
+      text: 'Workshops and talks given in different institutions in spring 2024 - autumn 2025, at the invitation of each institution. ',
       imgNote: 'teach-out session',
-      links: [{ label: 'Programme', url: 'https://dutchartinstitute.eu/page/21146/2023---2024-palestine-teach-outs-saturday-20-april' }],
-      rel: []
+      rel: ['cartography', 'humviol', 'starvation', 'genocidios']
     },
     {
-      id: 'patterns', lane: 'writing', t: 2024.44,
-      title: 'Patterns beyond AI', when: 'Jun 2024', with: 'Palestine Digital Activism Forum, 7amleh',
-      text: 'Presentation on open-source methodologies and tools for investigation.',
-      imgNote: 'presentation slide',
-      links: [],
-      rel: []
+      id: 'dai', lane: 'exhib', t: 2025.3,
+      title: 'ScreenWalk', when: 'Apr 2024', with: 'P  ',
+      text: 'Workshops and talks given in different institutions in spring 2024, at the invitation of each institution. ',
+      links: [{ label: 'Book', url: 'https://www.spectorbooks.com/book/militant-media' }],
+      rel: ['cartography', 'humviolent', 'starvation', 'genocidios']
     },
+    // {
+    //   id: 'patterns', lane: 'writing', t: 2024.44,
+    //   title: 'Patterns beyond AI', when: 'Jun 2024', with: 'Palestine Digital Activism Forum, 7amleh',
+    //   text: 'Presentation on open-source methodologies and tools for investigation.',
+    //   imgNote: 'presentation slide',
+    //   links: [],
+    //   rel: []
+    // },
     {
       id: 'vida', lane: 'writing', t: 2024.46,
       title: 'La vida corpórea de los datos', when: 'Jun 2024', with: 'Concreta nº 23',
       text: 'Text in “La composición activa de la presencia”.',
       img: 'images/corporea.png',
+
       links: [{ label: 'Issue', url: 'https://www.editorialconcreta.org/-Concreta-23-La-composicion-activa-' }],
       rel: ['riding']
     },
@@ -426,22 +437,22 @@ window.SITE = {
       rel: ['cartography']
     },
     {
-      id: 'frontera_casa', lane: 'writing', t: 2026.3,
+      id: 'frontera_casa', lane: 'writing', t: 2026.38,
       title: 'FRONTERA. Podcast La Casa de la Arquitectura', when: 'Oct 2025', with: 'La Casa de la Arquitectura · Marina Povedano & Natxo Escandell',
       text: 'Podcast. La frontera no es una línea, sino un espacio de fricción, tránsito y espera. Un territorio donde se tensan las normas, se redefinen las identidades y se hacen visibles las desigualdades. La arquitectura ha participado históricamente en su control, pero también en su cuestionamiento. En este bloque pensamos la frontera más allá de lo geográfico: fronteras físicas, digitales, legales y simbólicas; quién puede cruzarlas, quién queda atrapado y qué arquitecturas producen, para entender no solo dónde termina un territorio, sino quién decide —y para quién— el derecho a habitar. ',
       img: 'images/casa_arquitectura.jpg',
       links: [{ label: 'Podcast', url: 'https://lacasadelaarquitectura.es/recurso/la-casa-de-la-casa-frontera/035426a6-1b61-ad25-2fc3-2aa2ebd28524' }],
     },
     {
-      id: 'coloquio', lane: 'writing', t: 2026.3,
-      title: 'Anarqueología de los Medios', when: 'Sep 2025', with: 'Bogotá · Plano Negarivo',
+      id: 'coloquio', lane: 'writing', t: 2026.35,
+      title: 'Anarqueología de los Medios', when: 'Sep 2025', with: 'Bogotá · Plano Negativo',
       text: 'Encuentro académico y de investigación para reflexionar sobre las formas de interacción con las tecnologías y las maneras en que estas transforman la sociedad, el conocimiento y los modos de existencia, a partir de los ejes de investigación de arqueología de los medios, diseño, arte y ciencia.',
       img: 'images/coloquio_poster.png',
       loop: 'images/coloquio.mp4'
     },
     {
-      id: 'degrees', lane: 'writing', t: 2026.3,
-      title: '4 degrees of simulation', when: 'Sep 2025', with: 'Institute of Postnatural Studies',
+      id: 'degrees', lane: 'writing', t: 2026.39,
+      title: '4 degrees of simulation', when: 'Sep 2025', with: 'Institute of Postnatural Studies · Seminar coordinator',
       text: 'This seminar explores sensing as a political and contested practice of knowledge production. Perception is never neutral: infrastructures and techniques determine what is made visible or remains hidden, which claims are amplified or dismissed, whose lives are recognized, and which futures become imaginable. Sensing is thus inseparable from questions of access, recognition, and power.',
       img: 'images/simulation.png'
     }
