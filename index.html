@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Júlia Nueno Guitart</title>
+  <meta name="description"
+    content="I am a researcher and engineer working on the digital systems that organise life and the spaces we inhabit.">
+  <meta property="og:title" content="Júlia Nueno Guitart">
+  <meta property="og:description"
+    content="Researcher and engineer. Forensic Architecture; PhD at the Centre for Research Architecture, Goldsmiths.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=17">
+</head>
+
+<body>
+  <a class="skip" href="#scroller">Skip to the work</a>
+
+  <div class="app">
+    <!-- left: paths + vertical timeline -->
+    <aside class="left" aria-label="Timeline of work">
+      <nav class="paths" id="paths" aria-label="Paths through the work"></nav>
+      <div class="tl" id="tl"></div>
+      <div class="tl-foot">
+        <span class="hint">scroll the work · click a dot · ← →</span>
+      </div>
+    </aside>
+
+    <!-- right: every project, scrollable -->
+    <main class="right" id="scroller" tabindex="-1">
+      <header class="bar">
+        <button type="button" class="name" id="nameBtn" aria-expanded="false" aria-controls="about">
+          Júlia Nueno Guitart <span class="hint">about +</span>
+        </button>
+        <span class="bar-note">Work, 2017–now</span>
+      </header>
+      <h1 class="sr-only">Júlia Nueno Guitart: investigations, tools, exhibitions and writing</h1>
+
+      <!-- about: unfolds from the black name bar; folds when a project is opened -->
+      <section class="about is-folded" id="about" aria-label="About">
+        <div class="about-clip" id="aboutPanel">
+          <div class="about-content">
+            <canvas class="about-bg" id="aboutBg" aria-hidden="true"></canvas>
+            <div class="about-body">
+              <p>I am a researcher and engineer. My work explores the digital systems that organise
+                life and the spaces we inhabit, with the goal of developing new ways of understanding and acting with
+                and
+                through them. Currently, I am fellow researcher at <a href="https://forensic-architecture.org/"
+                  target="_blank" rel="noopener">Forensic Architecture</a>, and I am pursuing a PhD at the
+                <a href="https://research-architecture.org/HOME" target="_blank" rel="noopener">Centre
+                  for Research Architecture</a>, Goldsmiths, University of London.
+              </p>
+            </div>
+            <div class="about-foot">
+              <p class="foot">© Júlia Nueno Guitart</p>
+              <button type="button" class="close" data-close-about aria-label="Fold about">fold ↑</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="list"></div>
+    </main>
+  </div>
+
+  <script src="data.js?v=11"></script>
+  <script src="contours.js?v=9"></script>
+  <script src="app.js?v=17"></script>
+</body>
+
+</html>
