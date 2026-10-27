@@ -202,7 +202,7 @@
   /* ---------- intro: the dots fall into the timeline like tetris pieces, all four lanes at once,
      oldest first so the timeline stacks up from the bottom. Each project appears in the index
      (with its hover 'peek') the moment its dot lands. ---------- */
-  var INTRO_MS = 3000, LEAD_MS = 150, intro = null;
+  var INTRO_MS = 2000, LEAD_MS = 150, intro = null;
   function runIntro() {
     var timers = [], anims = [];
     intro = { timers: timers, anims: anims };
