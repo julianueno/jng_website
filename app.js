@@ -44,7 +44,8 @@
   // organisations become links wherever they're named (run on already-escaped text)
   var ORGS = [
     ['Centre for Research Architecture', 'https://research-architecture.org/HOME'],
-    ['Forensic Architecture', 'https://forensic-architecture.org/']
+    ['Forensic Architecture', 'https://forensic-architecture.org/'],
+    ['Rectangle', 'https://rectangle.design/']
   ];
   function linkOrgs(html) {
     ORGS.forEach(function (o) {
