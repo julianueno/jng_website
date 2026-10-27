@@ -1261,6 +1261,55 @@ a.org:hover {
   color: rgba(251, 250, 248, 0.6);
 }
 
+/* contact links: little line icons + mono labels, same voice as the fold button */
+.about-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.about-links a,
+.about-links a:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--paper-2);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.about-links svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: transform 160ms ease;
+}
+
+.about-links svg .fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+.about-links a:hover,
+.about-links a:focus-visible {
+  color: var(--accent);
+}
+
+.about-links a:hover svg {
+  transform: translateY(-2px);
+}
+
 /* ================= small screens ================= */
 @media (max-width: 860px) {
   :root {
@@ -1464,6 +1513,15 @@ a.org:hover {
 
   .about-foot .foot {
     color: var(--muted);
+  }
+
+  .about-links a,
+  .about-links a:visited {
+    color: var(--ink);
+  }
+
+  .about-links a:hover {
+    color: var(--accent);
   }
 }
 
