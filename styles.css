@@ -223,15 +223,6 @@ button {
   border-top: 1px solid var(--grid);
 }
 
-.yr span {
-  position: absolute;
-  left: 0;
-  bottom: 3px;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--muted);
-}
-
 .cols {
   position: absolute;
   inset: 0;
@@ -401,6 +392,40 @@ button {
   background: var(--accent);
   color: var(--paper-2);
   padding: 4px 5px;
+  /* the label is the handle: hold it and drag up or down */
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: box-shadow 140ms ease, padding 140ms ease;
+}
+
+/* a bigger target than the label itself, for fingers */
+.playhead-label::before {
+  content: "";
+  position: absolute;
+  inset: -10px -6px;
+}
+
+.playhead-label:hover,
+.playhead.dragging .playhead-label {
+  box-shadow: 0 0 0 3px rgba(212, 83, 43, 0.35);
+}
+
+.playhead.dragging .playhead-label {
+  cursor: grabbing;
+  padding: 4px 8px;
+}
+
+.playhead.dragging {
+  border-top-width: 2px;
+}
+
+html.scrubbing,
+html.scrubbing * {
+  cursor: grabbing !important;
+  user-select: none !important;
 }
 
 .playhead-label:empty {
@@ -1295,10 +1320,6 @@ a.org:hover {
     padding: 0 3px;
     overflow-wrap: normal;
     hyphens: auto;
-  }
-
-  .yr span {
-    font-size: 10px;
   }
 
   .mark .dot,

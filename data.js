@@ -236,15 +236,6 @@ window.SITE = {
       rel: []
     },
     {
-      id: 'waiting-doc', lane: 'exhib', t: 2023.05,
-      title: 'Waiting to Happen (documentary)', when: '2023', with: 'Airwars & VICE News',
-      text: 'Associate producer on the documentary of Airwars and VICE News’ year-long visual investigation into the failures at a US-backed prison in Syria.',
-      img: 'images/waiting-doc.jpg',
-      imgNote: 'film still',
-      links: [{ label: 'Watch', url: 'https://vimeo.com/793836865' }],
-      rel: []
-    },
-    {
       id: 'taiba', lane: 'exhib', t: 2023.3,
       title: 'The Six-Year-Old Victim of Britain’s War in Iraq', when: '2023', with: 'Airwars',
       text: 'Visual investigation into the killing of six-year-old Taiba Younis by a Hellfire missile. Open-Source Film Award.',

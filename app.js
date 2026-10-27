@@ -152,8 +152,9 @@
   function buildTimeline() {
     var heads = '<div class="tl-heads"><span></span>' + S.lanes.map(function (l) { return '<span>' + esc(l.label) + '</span>'; }).join('') + '</div>';
     var grid = '';
+    // year lines only: the orange playhead label already says when you are
     for (var y = START; y <= END; y++) {
-      grid += '<div class="yr" style="top:' + ypos(y) + '%">' + (y < END ? '<span>' + y + '</span>' : '') + '</div>';
+      grid += '<div class="yr" style="top:' + ypos(y) + '%"></div>';
     }
     var cols = S.lanes.map(function (l) { return '<div class="col" data-lane="' + esc(l.id) + '"></div>'; }).join('');
     $tl.innerHTML = heads + '<div class="tl-body"><div class="grid">' + grid + '</div><div class="cols">' + cols + '</div></div>';
@@ -200,8 +201,9 @@
     playhead = document.createElement('div');
     playhead.className = 'playhead';
     playhead.setAttribute('aria-hidden', 'true');
-    playhead.innerHTML = '<span class="playhead-label"></span>';
+    playhead.innerHTML = '<span class="playhead-label" title="Drag to move through the work"></span>';
     tlBody.appendChild(playhead);
+    bindScrub(playhead.querySelector('.playhead-label'));
 
     tip = document.createElement('div');
     tip.className = 'tooltip';
@@ -314,6 +316,7 @@
 
   function setPath(id, keepId) {
     state.path = id;
+    unpin();
     var ids = id ? pathById[id].ids : [];
     Object.keys(marks).forEach(function (mid) {
       marks[mid].classList.toggle('in-path', ids.indexOf(mid) !== -1);
@@ -482,7 +485,9 @@
 
   function sync() {
     ticking = false;
-    if (!cards.length) return;
+    if (!cards.length || scrubbing) return;
+    // dropped there by hand: stay put until the visitor scrolls
+    if (pinned !== null) { setPlayheadAt(pinned); return; }
     var line = readLine(), idx = 0;
     for (var i = 0; i < cards.length; i++) {
       if (cards[i].el.getBoundingClientRect().top <= line) idx = i; else break;
@@ -500,6 +505,75 @@
     var py = y / 100 * tlBody.clientHeight;
     playhead.style.transform = 'translateY(' + py.toFixed(1) + 'px)';
     playhead.querySelector('.playhead-label').textContent = a.when;
+  }
+
+  /* ---------- hold the orange label and drag it: the label follows the pointer, the project it crosses
+     is highlighted and brought to the reading line. Let go and it stays there (pinned) until the
+     visitor scrolls the list or picks a project again. ---------- */
+  var scrubbing = false, pinned = null;   // pinned: playhead position in % while it rests where it was dropped
+  var SNAP_PX = 8;                        // a dot this close to the playhead counts as crossed
+  function hitAt(y) {
+    var h = tlBody.clientHeight / 100;   // % -> px
+    var dot = -1, dotD = Infinity, bar = -1, barLen = Infinity, near = 0, nearD = Infinity;
+    cards.forEach(function (c, i) {
+      var e = byId[c.id], d;
+      if (e.end) {
+        var top = ypos(e.end), bot = ypos(e.t);
+        if (y >= top && y <= bot && bot - top < barLen) { bar = i; barLen = bot - top; }  // shortest bar covering y
+        d = (y < top ? top - y : y > bot ? y - bot : 0) * h;
+      } else {
+        d = Math.abs(ypos(e.t) - y) * h;
+        if (d < dotD) { dot = i; dotD = d; }
+      }
+      if (d < nearD) { near = i; nearD = d; }
+    });
+    if (dot >= 0 && dotD <= SNAP_PX) return dot;   // a dot right under the playhead wins
+    if (bar >= 0) return bar;                        // otherwise the bar it runs through
+    return near;                                     // otherwise whatever is closest
+  }
+  function setPlayheadAt(pct, label) {
+    playhead.style.transform = 'translateY(' + (pct / 100 * tlBody.clientHeight).toFixed(1) + 'px)';
+    if (label != null) playhead.querySelector('.playhead-label').textContent = label;
+  }
+  function scrubTo(clientY) {
+    if (!cards.length) return;
+    var r = tlBody.getBoundingClientRect();
+    var y = Math.min(100, Math.max(0, (clientY - r.top) / r.height * 100));
+    var idx = hitAt(y), e = byId[cards[idx].id];
+    pinned = y;
+    setPlayheadAt(y, e.when);
+    if (state.sel !== e.id) {
+      var sr = $scroller.getBoundingClientRect(), er = cards[idx].el.getBoundingClientRect();
+      var top = er.top - sr.top + $scroller.scrollTop - (lineY() - sr.top) + 2;
+      $scroller.scrollTop = Math.max(0, Math.min(top, $scroller.scrollHeight - $scroller.clientHeight));
+      setSel(e.id);
+    }
+  }
+  function unpin() { pinned = null; }
+  function bindScrub(handle) {
+    handle.addEventListener('pointerdown', function (ev) {
+      if (ev.button !== 0) return;
+      ev.preventDefault();
+      cancelScroll();
+      hideTip();
+      scrubbing = true;
+      playhead.classList.remove('glide');
+      playhead.classList.add('dragging');
+      document.documentElement.classList.add('scrubbing');
+      try { handle.setPointerCapture(ev.pointerId); } catch (_) { }
+    });
+    handle.addEventListener('pointermove', function (ev) {
+      if (scrubbing) scrubTo(ev.clientY);
+    });
+    function stop() {
+      if (!scrubbing) return;
+      scrubbing = false;
+      playhead.classList.remove('dragging');
+      document.documentElement.classList.remove('scrubbing');
+    }
+    handle.addEventListener('pointerup', stop);
+    handle.addEventListener('pointercancel', stop);
+    handle.addEventListener('lostpointercapture', stop);
   }
 
   function setSel(id) {
@@ -530,6 +604,7 @@
   function cancelScroll() { scrollAnim = null; }
   function scrollToY(y, smooth) {
     cancelScroll();
+    unpin();
     var from = $scroller.scrollTop, dist = y - from;
     if (!smooth || Math.abs(dist) < 2) { $scroller.scrollTop = y; sync(); return; }
     var dur = Math.min(1400, 500 + Math.abs(dist) * 0.25), t0 = Date.now();
@@ -624,10 +699,12 @@
     else if (ev.key === 'ArrowLeft') { ev.preventDefault(); step(-1); }
   });
 
-  // the visitor taking hold of the scroll cancels any eased scroll in progress
+  // the visitor taking hold of the scroll cancels any eased scroll in progress,
+  // and lets go of a playhead that was dropped by hand
   ['wheel', 'touchstart', 'pointerdown'].forEach(function (type) {
-    $scroller.addEventListener(type, cancelScroll, { passive: true });
+    $scroller.addEventListener(type, function () { cancelScroll(); unpin(); }, { passive: true });
   });
+  document.addEventListener('keydown', unpin);
 
   window.addEventListener('hashchange', function () {
     var m = location.hash.match(/^#w\/(.+)$/);
