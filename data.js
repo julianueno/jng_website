@@ -156,7 +156,7 @@ window.SITE = {
     // },
     {
       id: 'riding', lane: 'tools', t: 2022.3,
-      title: 'Riding the Algorithm', when: '2022', with: 'Centre for Research Architecture & IWGB ·  Ars Electronica Honorary Mention 2026',
+      title: 'SABOT', when: '2022', with: 'Centre for Research Architecture & IWGB ·  Ars Electronica Honorary Mention 2026',
       text: 'An app repurposing delivery workers’ data into a digital commons.',
       img: 'images/sabot.png',
       links: [
@@ -343,7 +343,7 @@ window.SITE = {
       id: 'challenging', lane: 'writing', t: 2024.17,
       title: 'Panel at Challenging the Visual', when: 'Mar 2024', with: 'Universitat Pompeu Fabra',
       text: 'Presentation of ongoing work on patterns of attacks in Gaza, truth, documentation and evidence.',
-      imgNote: 'images/coac.jpg',
+      imgNote: 'to do',
       links: [{ label: 'Programme', url: 'https://eventum.upf.edu/108914/programme/challenging-the-visual-distrust-emergency-uncertainty-ii-international-conference-visual-motifs-in-.html' }],
       rel: ['humviol']
     },
@@ -368,7 +368,6 @@ window.SITE = {
       title: 'Patterns of Destruction. Digital tools to investigate the genocide in Gaza', when: 'Apr 2024', with: 'Princeton Universty · McGill University · ETH Dutch Art Institute · COAC ',
       text: 'Workshops and talks given in different institutions in spring 2024 - autumn 2025, at the invitation of each institution. ',
       img: 'images/coac.jpg',
-
       rel: ['cartography', 'humviol', 'starvation', 'genocidios']
     },
     // {
