@@ -70,8 +70,8 @@
     return m ? IMG_DIR + m[1] + '.webp' : p;
   }
   function loopSrc(p) {
-    var m = MOBILE && p && p.match(/^images\/([^\/]+\.mp4)$/i);
-    return m ? 'images/mobile/' + m[1] : p;
+    var m = p && p.match(/^images\/([^\/]+\.mp4)$/i);
+    return m ? IMG_DIR + m[1] : p;
   }
   function posterOf(e) {
     if (e.img) return imgSrc(e.img);
