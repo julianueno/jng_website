@@ -1416,14 +1416,54 @@ a.org:hover {
     bottom: 10px;
   }
 
+  /* on phones About sits right under the black timeline, so it turns cream to stand apart */
+  .about {
+    background: var(--paper);
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule);
+  }
+
   .about-content {
     min-height: 0;
     padding: 16px var(--pad) 18px;
     box-shadow: inset 4px 0 0 var(--accent);
   }
 
+  /* contour colours are read from here by contours.js */
+  .about-bg {
+    --contour-minor: rgba(26, 25, 23, 0.08);
+    --contour-major: rgba(26, 25, 23, 0.18);
+    --contour-probe: rgba(26, 25, 23, 0.7);
+  }
+
   .about-body p {
     font-size: 19px;
+  }
+
+  .about .about-body a,
+  .about .about-body a:visited {
+    color: var(--ink);
+  }
+
+  .about .about-body a:hover {
+    color: var(--accent);
+  }
+
+  .about-body p.more {
+    color: var(--muted);
+  }
+
+  .close {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .close:hover {
+    color: #FFFFFF;
+  }
+
+  .about-foot .foot {
+    color: var(--muted);
   }
 }
 

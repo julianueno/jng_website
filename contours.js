@@ -3,7 +3,7 @@
   A noise field is drawn as contour lines (marching squares); one level is traced in the accent colour.
   The cursor raises the terrain so lines gather around it; an optional "focus" point can do the same.
 
-  Used by the About panel: light lines on ink, with a survey crosshair + coordinate readout at the cursor.
+  Used by the About panel: light lines on ink (dark lines on cream on phones, set in CSS), with a survey crosshair + coordinate readout at the cursor.
 
   window.Contours.create(canvas, options) -> { start, stop, focus(x, y), unfocus() }
 */
@@ -42,6 +42,7 @@
     var o = {}, k;
     for (k in DEFAULTS) o[k] = DEFAULTS[k];
     for (k in (opts || {})) o[k] = opts[k];
+    var base = { minor: o.minor, major: o.major, probeText: o.probeText };
     var ctx = cv.getContext('2d');
     var CELL = o.cell, W = 0, H = 0, cols = 0, rows = 0, field = null;
     var mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999, in: false, a: 0 };
@@ -55,6 +56,11 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       cols = Math.ceil(W / CELL) + 1; rows = Math.ceil(H / CELL) + 1;
       field = new Float32Array(cols * rows);
+      // CSS can override the line colours (e.g. dark lines on the white About on phones)
+      var cs = getComputedStyle(cv);
+      o.minor = cs.getPropertyValue('--contour-minor').trim() || base.minor;
+      o.major = cs.getPropertyValue('--contour-major').trim() || base.major;
+      o.probeText = cs.getPropertyValue('--contour-probe').trim() || base.probeText;
     }
 
     function compute(t) {
