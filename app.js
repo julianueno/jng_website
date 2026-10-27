@@ -197,10 +197,63 @@
     tip.hidden = true;
     tlBody.appendChild(tip);
 
-    // dots pop in from the top on load
-    desc.forEach(function (e, i) { marks[e.id].style.setProperty('--d', (150 + i * 30) + 'ms'); });
-    $tl.classList.add('intro');
   }
+
+  /* ---------- intro: the dots fall into the timeline like tetris pieces, all four lanes at once,
+     oldest first so the timeline stacks up from the bottom. Each project appears in the index
+     (with its hover 'peek') the moment its dot lands. ---------- */
+  var INTRO_MS = 3000, LEAD_MS = 150, intro = null;
+  function runIntro() {
+    var timers = [], anims = [];
+    intro = { timers: timers, anims: anims };
+    $list.classList.add('intro-wait');
+    $tl.classList.add('falling');
+    S.lanes.forEach(function (lane) {
+      var items = chrono.filter(function (e) { return e.lane === lane.id; });
+      var n = items.length;
+      if (!n) return;
+      var falls = items.map(function (e) {
+        var d = marks[e.id].offsetTop + 14;               // from just under the column heads
+        return { e: e, d: d, dur: 160 + Math.sqrt(d) * 11 }; // gravity: longer drops take a bit longer
+      });
+      var maxDur = Math.max.apply(null, falls.map(function (f) { return f.dur; }));
+      var stepMs = n > 1 ? (INTRO_MS - LEAD_MS - maxDur) / (n - 1) : 0;
+      falls.forEach(function (f, i) {
+        var jitter = (i > 0 && i < n - 1) ? (Math.random() - 0.5) * stepMs * 0.6 : 0;
+        var delay = LEAD_MS + i * stepMs + jitter;
+        var squash = f.e.end ? 'scaleX(1.5)' : 'scale(1.45, 0.6)';
+        anims.push(marks[f.e.id].querySelector('.dot').animate([
+          { transform: 'translateY(' + (-f.d) + 'px)', opacity: 0, easing: 'cubic-bezier(.5, 0, .9, .4)' },
+          { opacity: 1, offset: 0.12 },
+          { transform: 'translateY(0px) ' + squash, offset: 0.8, easing: 'ease-out' },
+          { transform: 'none', opacity: 1 }
+        ], { duration: f.dur, delay: delay, fill: 'backwards' }));
+        timers.push(setTimeout(function () { reveal(f.e.id); }, delay + f.dur * 0.8));
+      });
+    });
+    timers.push(setTimeout(endIntro, INTRO_MS + 500));
+  }
+  function reveal(id) {
+    var el = document.getElementById('w-' + id);
+    if (!el || el.classList.contains('arrived')) return;
+    el.classList.add('arrived', 'peek');
+    for (var p = el.previousElementSibling; p; p = p.previousElementSibling) {
+      if (p.classList.contains('year-head')) { p.classList.add('arrived'); break; }
+    }
+    setTimeout(function () { el.classList.remove('peek'); }, 380);
+  }
+  // finishes at once if the visitor starts doing something
+  function endIntro() {
+    if (!intro) return;
+    intro.timers.forEach(clearTimeout);
+    intro.anims.forEach(function (a) { try { a.finish(); } catch (_) { } });
+    intro = null;
+    $list.classList.remove('intro-wait');
+    $tl.classList.remove('falling');
+  }
+  ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (type) {
+    document.addEventListener(type, endIntro, { passive: true, capture: true });
+  });
 
   function showTip(el, e) {
     var host = tlBody.getBoundingClientRect(), r = el.getBoundingClientRect();
@@ -299,7 +352,7 @@
       '</article>';
   }
 
-  function buildList() {
+  function buildList(quiet) {
     var items = state.path ? desc.filter(function (e) { return pathById[state.path].ids.indexOf(e.id) !== -1; }) : desc;
     var html = '';
     if (state.path) {
@@ -317,6 +370,7 @@
     liveId = null;
     state.open = null;
     Object.keys(marks).forEach(function (k) { marks[k].classList.remove('open'); });
+    if (quiet) return;
     // rows drop in one after another
     cards.forEach(function (c, i) { c.el.style.setProperty('--i', Math.min(i, 14)); });
     $list.classList.remove('list-enter');
@@ -579,12 +633,14 @@
   window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { if (isPhone() && state.open) closeEntry(); drawPath(); sync(); if (state.open) fitPanel(document.getElementById('w-' + state.open)); }, 80); });
 
   /* ---------- init ---------- */
-  buildTimeline();
-  buildPaths();
-  buildList();
-
   var h = location.hash.match(/^#w\/(.+)$/);
   var deep = h && byId[decodeURIComponent(h[1])] ? decodeURIComponent(h[1]) : null;
+  var playIntro = !reduceMotion && !deep && !!Element.prototype.animate;
+
+  buildTimeline();
+  buildPaths();
+  buildList(playIntro);
+  if (playIntro) runIntro();
   aboutState();
   if (deep) goTo(deep, false);
   if (location.hash === '#about') {

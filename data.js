@@ -343,7 +343,7 @@ window.SITE = {
       id: 'challenging', lane: 'writing', t: 2024.17,
       title: 'Panel at Challenging the Visual', when: 'Mar 2024', with: 'Universitat Pompeu Fabra',
       text: 'Presentation of ongoing work on patterns of attacks in Gaza, truth, documentation and evidence.',
-      imgNote: 'conference slide',
+      imgNote: 'images/coac.jpg',
       links: [{ label: 'Programme', url: 'https://eventum.upf.edu/108914/programme/challenging-the-visual-distrust-emergency-uncertainty-ii-international-conference-visual-motifs-in-.html' }],
       rel: ['humviol']
     },
@@ -365,9 +365,10 @@ window.SITE = {
     },
     {
       id: 'dai', lane: 'writing', t: 2025.3,
-      title: 'Patterns of Destruction. Digital tools to investigate the genocide in Gaza', when: 'Apr 2024', with: 'Princeton Universty · McGill University · ETH Dutch Art Institute  ',
+      title: 'Patterns of Destruction. Digital tools to investigate the genocide in Gaza', when: 'Apr 2024', with: 'Princeton Universty · McGill University · ETH Dutch Art Institute · COAC ',
       text: 'Workshops and talks given in different institutions in spring 2024 - autumn 2025, at the invitation of each institution. ',
-      imgNote: 'teach-out session',
+      img: 'images/coac.jpg',
+
       rel: ['cartography', 'humviol', 'starvation', 'genocidios']
     },
     // {

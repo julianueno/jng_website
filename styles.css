@@ -118,10 +118,8 @@ button { font: inherit; color: inherit; }
 .mark.range.in-path .dot { background: var(--muted); border-color: var(--muted); }
 .mark.range.on .dot { transform: none; background: var(--accent); border-color: var(--accent); }
 
-.tl.intro .mark .dot { animation: pop 520ms cubic-bezier(.3, 1.6, .5, 1) var(--d, 0ms) backwards; }
-.tl.intro .mark.range .dot { animation-name: grow; transform-origin: center top; }
-@keyframes pop  { from { transform: scale(0); opacity: 0; } }
-@keyframes grow { from { transform: scaleY(0); opacity: 0; } }
+/* the falling-in intro is driven from app.js (runIntro); the 'current' ring waits until it's over */
+.tl.falling .mark::after { display: none; }
 
 .path-line { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: visible; }
 .path-line polyline { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; }
@@ -275,6 +273,14 @@ button { font: inherit; color: inherit; }
 .list-enter .entry { animation: rowIn 620ms cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 45ms); }
 @keyframes rowIn { from { opacity: 0; transform: translateX(-28px); } }
 
+/* intro: each row waits until its dot lands in the timeline, then appears with one hover 'peek' */
+.intro-wait .entry, .intro-wait .year-head { opacity: 0; transition: opacity 200ms ease; }
+.intro-wait .entry.arrived, .intro-wait .year-head.arrived { opacity: 1; }
+.entry.peek:not(.is-open) .entry-head { transform: translateX(16px); box-shadow: -12px 0 22px -10px rgba(26, 25, 23, 0.55); }
+.entry.peek .spine-img img { transform: scale(1.3) translateX(-3%); }
+.entry.peek .t { font-stretch: 84%; }
+.entry.peek .plus { transform: rotate(90deg); }
+
 /* the unrolled tape: media flush and full width, then the text in the page margins */
 .entry-panel { display: grid; gap: 14px; padding: 0 0 40px; background: var(--paper); }
 .entry-panel > :not(.media) { padding: 0 var(--pad) 0 calc(var(--pad) + 6px); }
@@ -400,7 +406,7 @@ a.org:hover { color: var(--accent); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tl.intro .mark .dot, .mark.on::after, .entry.is-open .frame > img.still, .entry.is-open .entry-panel, .list-enter .entry,
+  .mark.on::after, .entry.is-open .frame > img.still, .entry.is-open .entry-panel, .list-enter .entry,
   .entry.is-open .entry-head, .entry.pushed .entry-head { animation: none; }
   .entry-head, .spine-img img { transition: none; }
   .playhead.glide, .about { transition: none; }
