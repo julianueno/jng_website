@@ -12,3 +12,4 @@ ffmpeg -y -loglevel error -ss "$START" -t "$DUR" -i "$IN" -an \
   "$DIR/$ID-loop.mp4"
 ffmpeg -y -loglevel error -ss "$START" -i "$IN" -frames:v 1 -vf "scale=1280:-2" -q:v 4 "$DIR/$ID-poster.jpg"
 echo "wrote images/$ID-loop.mp4 ($(du -h "$DIR/$ID-loop.mp4" | cut -f1)) and images/$ID-poster.jpg"
+echo "now run ./make-images.sh to build the desktop/mobile copies"

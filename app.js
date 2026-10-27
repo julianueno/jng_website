@@ -62,8 +62,19 @@
     if ((m = url.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]+)/))) return { kind: 'drive', id: m[1] };
     return null;
   }
+  // data.js points at originals in images/; serve the size-appropriate copy built by make-images.sh
+  var MOBILE = !!(window.matchMedia && window.matchMedia('(max-width: 860px), (hover: none) and (pointer: coarse)').matches);
+  var IMG_DIR = MOBILE ? 'images/mobile/' : 'images/desktop/';
+  function imgSrc(p) {
+    var m = p && p.match(/^images\/([^\/]+)\.(jpe?g|png|webp)$/i);
+    return m ? IMG_DIR + m[1] + '.webp' : p;
+  }
+  function loopSrc(p) {
+    var m = MOBILE && p && p.match(/^images\/([^\/]+\.mp4)$/i);
+    return m ? 'images/mobile/' + m[1] : p;
+  }
   function posterOf(e) {
-    if (e.img) return e.img;
+    if (e.img) return imgSrc(e.img);
     var v = parseVideo(e.video);
     if (!v) return null;
     if (v.kind === 'youtube') return 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg';
@@ -94,7 +105,7 @@
     var moving = !!(e.loop || (v && v.kind !== 'drive'));
     var inner;
     if (live && e.loop && !reduceMotion) {
-      inner = '<video class="loop" src="' + esc(e.loop) + '"' + (poster ? ' poster="' + esc(poster) + '"' : '') +
+      inner = '<video class="loop" src="' + esc(loopSrc(e.loop)) + '"' + (poster ? ' poster="' + esc(poster) + '"' : '') +
         ' autoplay muted loop playsinline preload="auto" aria-label="' + alt + '"></video>';
     } else if (live && v && v.kind !== 'drive' && !reduceMotion) {
       inner = (poster ? '<img class="under" src="' + esc(poster) + '" alt="">' : '') +
