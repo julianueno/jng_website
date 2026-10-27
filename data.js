@@ -167,7 +167,7 @@ window.SITE = {
     },
     {
       id: 'osmp', lane: 'tools', t: 2023.45,
-      title: 'Open Source Munitions Portal', when: '2023', with: 'Airwars & ARES',
+      title: 'Open Source Munitions Portal', when: '2023', with: 'Airwars & ARES · Rectangle',
       text: 'A visual tool for journalists and researchers to classify munition remnants found on the battlefield, with more than 500 verified images.',
       img: 'images/osmp.png',
       links: [{ label: 'Portal', url: 'https://osmp.ngo/' }],
@@ -175,7 +175,7 @@ window.SITE = {
     },
     {
       id: 'cartography', lane: 'tools', t: 2024.9,
-      title: 'A Cartography of Genocide', when: '2024', with: 'Forensic Architecture',
+      title: 'A Cartography of Genocide', when: '2024', with: 'Forensic Architecture · Rectangle',
       text: 'Documentation and analysis of Israel’s military conduct in Gaza.',
       img: 'images/cartography.jpg',
       imgNote: 'platform screenshot, incidents across the Strip',
