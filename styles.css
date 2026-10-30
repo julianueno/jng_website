@@ -10,7 +10,8 @@
   --hatch-b: #E3E0DA;
   --accent: #B8401F;
   --accent-soft: rgba(184, 64, 31, 0.18);
-  --sans: 'Archivo', system-ui, -apple-system, sans-serif;
+  /* 'Roboto Flex' is loaded with only the "&" in it, so it swaps Archivo's ampersand and nothing else */
+  --sans: 'Roboto Flex', 'Archivo', system-ui, -apple-system, sans-serif;
   --mono: var(--sans);                    /* one typeface throughout: labels use Archivo too */
   /* type scale: keep to these */
   --fs-label: 13px;                       /* labels, tags, dates, timeline, tooltip, facts, links, chips */
@@ -207,6 +208,7 @@ button {
 
 .tl-heads span {
   padding: 0 6px;
+  text-align: center;
 }
 
 .tl-body {
