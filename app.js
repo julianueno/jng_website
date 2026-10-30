@@ -66,13 +66,15 @@
   // data.js points at originals in images/; serve the size-appropriate copy built by make-images.sh
   var MOBILE = !!(window.matchMedia && window.matchMedia('(max-width: 860px), (hover: none) and (pointer: coarse)').matches);
   var IMG_DIR = MOBILE ? 'images/mobile/' : 'images/desktop/';
+  // bump after re-running make-images.sh so browsers fetch the new files instead of cached ones
+  var IMG_V = '?v=3';
   function imgSrc(p) {
     var m = p && p.match(/^images\/([^\/]+)\.(jpe?g|png|webp)$/i);
-    return m ? IMG_DIR + m[1] + '.webp' : p;
+    return m ? IMG_DIR + m[1] + '.webp' + IMG_V : p;
   }
   function loopSrc(p) {
     var m = p && p.match(/^images\/([^\/]+\.mp4)$/i);
-    return m ? IMG_DIR + m[1] : p;
+    return m ? IMG_DIR + m[1] + IMG_V : p;
   }
   function posterOf(e) {
     if (e.img) return imgSrc(e.img);
@@ -123,7 +125,9 @@
     } else if (moving || v) {
       badge = '<span class="badge"><span class="tri" aria-hidden="true"></span>' + (e.loop && !v ? 'moving image' : 'video') + '</span>';
     }
-    return '<div class="frame' + (contain && !moving ? ' is-contain' : '') + '">' + inner + badge + '</div>';
+    // stills and loops keep their own proportions (no cropping); embedded videos stay 16:9
+    var natural = !(live && v && v.kind !== 'drive' && !reduceMotion);
+    return '<div class="frame' + (contain && !moving ? ' is-contain' : '') + (natural ? ' is-natural' : '') + '">' + inner + badge + '</div>';
   }
 
   function mediaEl(id) { return $list.querySelector('[data-media="' + id + '"]'); }
@@ -146,6 +150,7 @@
     if (!v || !m) return;
     var frame = m.querySelector('.frame');
     frame.classList.add('playing');
+    frame.classList.remove('is-natural');
     frame.innerHTML = '<iframe class="player" src="' + esc(playerSrc(v, e.videoStart)) + '" title="' + esc(e.title) + '" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
   }
 
@@ -346,6 +351,14 @@
     var poster = posterOf(e), v = parseVideo(e.video);
     // the spine of the tape: the project's image fills it; without one, a solid colour per type of work
     var spine = poster ? '<span class="spine-img" aria-hidden="true"><img src="' + esc(poster) + '" alt="" loading="lazy"></span>' : '';
+    // details under the description: a mono label on the left, the information in sans on the right
+    function fact(label, html, cls) {
+      return '<div class="fact' + (cls ? ' ' + cls : '') + '"><dt>' + label + '</dt><dd>' + html + '</dd></div>';
+    }
+    var facts = (e.with ? fact('With', linkOrgs(esc(e.with))) : '') +
+      (links ? fact('Links', '<span class="links">' + links + '</span>') : '') +
+      (rel ? fact('Connected', '<span class="chips">' + rel + '</span>', 'fact-nav') : '') +
+      (onPaths ? fact('On the paths', '<span class="chips">' + onPaths + '</span>', 'fact-nav') : '');
     return '<article class="entry tape ' + (poster ? 'has-img' : 'no-img') + '" data-lane="' + esc(e.lane) + '" id="w-' + esc(e.id) + '" data-id="' + esc(e.id) + '">' +
       '<h2 class="entry-title"><button type="button" class="entry-head" data-toggle="' + esc(e.id) + '" aria-expanded="false" aria-controls="p-' + esc(e.id) + '">' +
       spine +
@@ -355,14 +368,11 @@
       '<span class="plus" aria-hidden="true"></span>' +
       '</button></h2>' +
       '<div class="entry-panel" id="p-' + esc(e.id) + '" hidden>' +
-      (e.with ? '<div class="with">' + linkOrgs(esc(e.with)) + '</div>' : '') +
       '<figure class="media" data-media="' + esc(e.id) + '">' + renderMedia(e, false) + '</figure>' +
       (e.imgCaption ? '<p class="caption">' + esc(e.imgCaption) + '</p>' : '') +
       '<div class="entry-body">' +
       '<p class="text">' + linkOrgs(esc(e.text)) + '</p>' +
-      (links ? '<div class="links">' + links + '</div>' : '') +
-      (rel ? '<div class="block"><span class="h">Connected</span><div class="chips">' + rel + '</div></div>' : '') +
-      (onPaths ? '<div class="block"><span class="h">On the paths</span><div class="chips">' + onPaths + '</div></div>' : '') +
+      (facts ? '<dl class="facts">' + facts + '</dl>' : '') +
       '</div></div>' +
       '</article>';
   }
@@ -422,19 +432,49 @@
     return shift;
   }
 
-  // size the image so the whole opened project (title, image, text, connections, paths)
-  // fits on one screen below the reading line; the text keeps its size, the image gives way
+  // an opened project fits on one screen below the reading line, image beside the text.
+  // The image column is sized from the image's own proportions and the height available (never
+  // cropped); the text column takes the rest and scrolls inside itself if a description is long.
+  // On phones everything stacks and only video frames are sized here.
+  var TEXT_MIN = 280;
   function fitPanel(el) {
-    var frame = el && el.querySelector('.entry-panel .frame');
-    if (!frame) return;
+    var panel = el && el.querySelector('.entry-panel');
+    if (!panel) return;
     var sr = $scroller.getBoundingClientRect();
-    var panel = el.querySelector('.entry-panel');
-    frame.style.height = '0px';
-    var rest = el.querySelector('.entry-head').offsetHeight + panel.offsetHeight
-      - parseFloat(getComputedStyle(panel).paddingBottom || 0);
-    var avail = sr.height - (lineY() - sr.top) - rest - 16;
-    var w = frame.clientWidth;
-    var h = Math.round(Math.max(170, Math.min(avail, w * 9 / 16)));
+    var H = Math.round(Math.max(260, sr.bottom - lineY() - el.querySelector('.entry-head').offsetHeight - 44));
+    // read by CSS: max height of the image and of the text column
+    panel.style.setProperty('--fit-h', H + 'px');
+    panel.style.gridTemplateColumns = '';
+    var frame = panel.querySelector('.frame');
+    if (!frame) return;
+    var narrow = !!(window.matchMedia && window.matchMedia('(max-width: 860px)').matches);
+    var natural = frame.classList.contains('is-natural');
+    var ratio = 16 / 9;
+    if (natural) {
+      var m = frame.querySelector('img.still, video.loop');
+      var nw = m && (m.naturalWidth || m.videoWidth), nh = m && (m.naturalHeight || m.videoHeight);
+      if (nw && nh) ratio = nw / nh;
+      else {
+        ratio = 4 / 3;   // until the image arrives, then fit again with its real proportions
+        if (m && !m._fitWait) {
+          m._fitWait = true;
+          m.addEventListener(m.tagName === 'VIDEO' ? 'loadedmetadata' : 'load', function () {
+            if (state.open === el.dataset.id) fitPanel(el);
+          }, { once: true });
+        }
+      }
+    }
+    var cs = getComputedStyle(panel);
+    var inner = panel.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    var w = inner;
+    if (!narrow) {
+      var gap = parseFloat(cs.columnGap) || 32;
+      // as wide as the image is at full height, but leave the text its minimum (or at least half)
+      w = Math.round(Math.max(Math.min(H * ratio, inner - gap - TEXT_MIN), Math.min(H * ratio, inner * 0.5)));
+      panel.style.gridTemplateColumns = w + 'px minmax(0, 1fr)';
+    }
+    if (natural) { frame.style.height = ''; return; }
+    var h = Math.round(narrow ? w * 9 / 16 : Math.min(H, w * 9 / 16));
     frame.style.height = h + 'px';
     // background videos are 16:9; keep them covering the frame whatever its proportion
     var ifr = frame.querySelector('iframe.bg');
@@ -482,11 +522,16 @@
   }
 
   var ticking = false;
-  function onScroll() { hideTip(); if (!ticking) { ticking = true; requestAnimationFrame(sync); } }
+  function onScroll() {
+    if (!steer) clearHover();
+    hideTip();
+    if (!ticking) { ticking = true; requestAnimationFrame(sync); }
+  }
 
   function sync() {
     ticking = false;
-    if (!cards.length || scrubbing) return;
+    // while gliding to a picked project, or previewing a hovered row, the playhead is steered directly
+    if (!cards.length || scrubbing || steer || hoverId) return;
     // dropped there by hand: stay put until the visitor scrolls
     if (pinned !== null) { setPlayheadAt(pinned); return; }
     var line = readLine(), idx = 0;
@@ -503,6 +548,7 @@
   function placePlayhead(idx, frac) {
     var a = byId[cards[idx].id], b = cards[idx + 1] ? byId[cards[idx + 1].id] : null;
     var y = ypos(a.t) + (b ? (ypos(b.t) - ypos(a.t)) * frac : 0);
+    lastPct = y;
     var py = y / 100 * tlBody.clientHeight;
     playhead.style.transform = 'translateY(' + py.toFixed(1) + 'px)';
     playhead.querySelector('.playhead-label').textContent = a.when;
@@ -512,6 +558,8 @@
      is highlighted and brought to the reading line. Let go and it stays there (pinned) until the
      visitor scrolls the list or picks a project again. ---------- */
   var scrubbing = false, pinned = null;   // pinned: playhead position in % while it rests where it was dropped
+  var lastPct = 0;                        // where the playhead currently is, in %
+  var steer = null;                       // {from, to, label}: the playhead glides straight to a picked project
   var SNAP_PX = 8;                        // a dot this close to the playhead counts as crossed
   function hitAt(y) {
     var h = tlBody.clientHeight / 100;   // % -> px
@@ -533,6 +581,7 @@
     return near;                                     // otherwise whatever is closest
   }
   function setPlayheadAt(pct, label) {
+    lastPct = pct;
     playhead.style.transform = 'translateY(' + (pct / 100 * tlBody.clientHeight).toFixed(1) + 'px)';
     if (label != null) playhead.querySelector('.playhead-label').textContent = label;
   }
@@ -594,20 +643,28 @@
     if (state.path && pathById[state.path].ids.indexOf(id) === -1) { setPath(null, id); return; }
     var el = document.getElementById('w-' + id);
     if (!el) return;
+    clearHover();
+    // the playhead heads straight for the picked project: closing the previous one would otherwise
+    // shift the list under the reading line and make it jump back before it moves on
+    var glide = smooth && !reduceMotion;
+    var from = lastPct;
     var shift = openEntry(id, !smooth);
     var sr = $scroller.getBoundingClientRect();
     var top = el.getBoundingClientRect().top - sr.top + $scroller.scrollTop - (lineY() - sr.top) + 2 - shift;
-    scrollToY(Math.max(0, Math.min(top, $scroller.scrollHeight - $scroller.clientHeight)), smooth && !reduceMotion);
+    if (glide) setSel(id);
+    scrollToY(Math.max(0, Math.min(top, $scroller.scrollHeight - $scroller.clientHeight)), glide,
+      glide ? { from: from, to: ypos(byId[id].t), label: byId[id].when } : null);
   }
 
   // eased scroll of the project column (not relying on the browser's smooth scrolling)
   var scrollAnim = null;
-  function cancelScroll() { scrollAnim = null; }
-  function scrollToY(y, smooth) {
+  function cancelScroll() { scrollAnim = null; steer = null; }
+  function scrollToY(y, smooth, steerTo) {
     cancelScroll();
     unpin();
     var from = $scroller.scrollTop, dist = y - from;
     if (!smooth || Math.abs(dist) < 2) { $scroller.scrollTop = y; sync(); return; }
+    steer = steerTo || null;
     var dur = Math.min(1400, 500 + Math.abs(dist) * 0.25), t0 = Date.now();
     var token = {};
     scrollAnim = token;
@@ -616,10 +673,44 @@
       var p = Math.min(1, (Date.now() - t0) / dur);
       var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
       $scroller.scrollTop = from + dist * e;
-      sync();
-      if (p < 1) setTimeout(frame, 16); else scrollAnim = null;
+      if (steer) setPlayheadAt(steer.from + (steer.to - steer.from) * e, steer.label);
+      else sync();
+      if (p < 1) setTimeout(frame, 16);
+      else { scrollAnim = null; steer = null; sync(); }
     }
     frame();
+  }
+
+  /* ---------- hovering a row in the index previews it on the timeline: the playhead glides to it
+     and its dot shows the thumbnail tooltip. Leaving the index hands the playhead back to the scroll. ---------- */
+  var hoverId = null, hoverGlideT;
+  function hoverGlide() {
+    if (reduceMotion) return;
+    playhead.classList.add('hover-glide');
+    clearTimeout(hoverGlideT);
+    hoverGlideT = setTimeout(function () { playhead.classList.remove('hover-glide'); }, 320);
+  }
+  function clearHover() {
+    if (!hoverId) return;
+    if (marks[hoverId]) marks[hoverId].classList.remove('hl');
+    hoverId = null;
+  }
+  function previewRow(id) {
+    if (id === hoverId || scrubbing || steer || intro || !byId[id] || !marks[id]) return;
+    clearHover();
+    var e = byId[id];
+    hoverId = id;
+    marks[id].classList.add('hl');
+    hoverGlide();
+    setPlayheadAt(ypos(e.t), e.when);
+    showTip(marks[id], e);
+  }
+  function endPreview() {
+    if (!hoverId) return;
+    clearHover();
+    hideTip();
+    hoverGlide();
+    sync();
   }
 
   function step(d) {
@@ -714,6 +805,19 @@
   });
 
   $scroller.addEventListener('scroll', onScroll, { passive: true });
+  {
+    // a real mouse only: touch pointers never report 'mouse', so phones and tablets are left alone
+    var lastPX = -1, lastPY = -1;
+    $list.addEventListener('pointermove', function (ev) {
+      if (ev.pointerType !== 'mouse') return;
+      // Chrome fires a still pointermove after scrolling; only real mouse movement counts
+      if (ev.clientX === lastPX && ev.clientY === lastPY) return;
+      lastPX = ev.clientX; lastPY = ev.clientY;
+      var head = ev.target.closest('.entry-head[data-toggle]');
+      if (head) previewRow(head.dataset.toggle); else endPreview();
+    });
+    $list.addEventListener('pointerleave', endPreview);
+  }
   var resizeT;
   window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { drawPath(); sync(); if (state.open) fitPanel(document.getElementById('w-' + state.open)); }, 80); });
 

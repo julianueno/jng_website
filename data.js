@@ -156,7 +156,7 @@ window.SITE = {
     // },
     {
       id: 'riding', lane: 'tools', t: 2022.3,
-      title: 'SABOT', when: '2022', with: 'Centre for Research Architecture & IWGB ·  Ars Electronica Honorary Mention 2026',
+      title: 'Sabot', when: '2022', with: 'Centre for Research Architecture & IWGB ·  Ars Electronica Honorary Mention 2026',
       text: 'An app repurposing delivery workers’ data into a digital commons.',
       img: 'images/sabot.png',
       links: [
@@ -273,8 +273,8 @@ window.SITE = {
     // },
     {
       id: 'earthworks', lane: 'exhib', t: 2026.5,
-      title: 'Earthworks', when: '2026', with: 'Barcelona · World Congress of Architecture · Co-curation with Eyal Weizman and Lizzie Breiner',
-      text: 'Earthworks brings together a selection of @forensicarchitecture recent work on Israeli military conduct in Gaza, placing it into dialogue with Eyal Weizman and Rafi Segal’s censored publication, A Civilian Occupation: The Politics of Israeli Architecture, initially conceived for the 2002 World Congress in Berlin. Included works explore the relationship between destruction and construction in Israel’s establishment of military infrastructure for spatial control, with all new work on military earth berm typologies and a video based on Weizman and Segal’s original publication, digitised for the first time for this presentation. Gaza has become not only a demolition zone but a construction site, reshaped according to Israel’s blueprint. Military bulldozers have ripped through the fractured remains of buildings and refashioned the debris into hundreds of towering earth berms—the modular building blocks of a new necro-architecture designed to keep Palestinians under perpetual siege and dismantle the basic conditions of life in Gaza',
+      title: 'Earthworks', when: '2026', with: 'Barcelona · World Congress of Architecture · Forensic Architecture ·Co-curation with Eyal Weizman and Lizzie Breiner',
+      text: 'Earthworks brings together a selection of Forensic Architecture recent work on Israeli military conduct in Gaza, placing it into dialogue with Eyal Weizman and Rafi Segal’s censored publication, A Civilian Occupation: The Politics of Israeli Architecture, initially conceived for the 2002 World Congress in Berlin. Included works explore the relationship between destruction and construction in Israel’s establishment of military infrastructure for spatial control, with all new work on military earth berm typologies and a video based on Weizman and Segal’s original publication, digitised for the first time for this presentation. Gaza has become not only a demolition zone but a construction site, reshaped according to Israel’s blueprint. Military bulldozers have ripped through the fractured remains of buildings and refashioned the debris into hundreds of towering earth berms—the modular building blocks of a new necro-architecture designed to keep Palestinians under perpetual siege and dismantle the basic conditions of life in Gaza',
       img: 'images/earthworks.jpg',
       imgNote: 'exhibition view, Tres Xemeneies',
       links: [],

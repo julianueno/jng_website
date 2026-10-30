@@ -1,0 +1,4 @@
+
+# full-resolution sources for make-images.sh (kept locally, not deployed)
+images/_originals/
+.DS_Store

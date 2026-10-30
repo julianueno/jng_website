@@ -3,8 +3,9 @@
 #   1. put new originals (.jpg .png .webp .mp4) straight into images/
 #   2. run ./make-images.sh
 #   3. it writes the copies below, then DELETES the originals (keep your own backup)
-#   images/desktop/    WebP, max 1600px wide, quality 78   (+ .mp4 loops as-is)
-#   images/mobile/     WebP, max 800px wide,  quality 60   (+ lighter 540px .mp4 loops)
+#   images/desktop/    WebP, max 2400px wide, quality 88   (+ .mp4 loops as-is)
+#   images/mobile/     WebP, max 1200px wide, quality 80   (+ lighter 540px .mp4 loops)
+#   (sized for retina screens: images fill the right panel and zoom slightly when animated)
 # Keep using  img: 'images/<name>.jpg'  /  loop: 'images/<name>.mp4'  in data.js —
 # app.js maps those to the right folder.
 #   ./make-images.sh --keep   build copies but leave the originals in place
@@ -17,8 +18,8 @@ for f in "$ROOT"/*.jpg "$ROOT"/*.jpeg "$ROOT"/*.png "$ROOT"/*.webp; do
   [ -f "$f" ] || continue
   name="$(basename "$f")"; base="${name%.*}"
   d="$ROOT/desktop/$base.webp"; m="$ROOT/mobile/$base.webp"
-  magick "$f" -auto-orient -strip -resize '1600x1600>' -quality 78 -define webp:method=6 "$d"
-  magick "$f" -auto-orient -strip -resize '800x800>' -quality 60 -define webp:method=6 "$m"
+  magick "$f" -auto-orient -strip -resize '2400x2400>' -quality 88 -define webp:method=6 "$d"
+  magick "$f" -auto-orient -strip -resize '1200x1200>' -quality 80 -define webp:method=6 "$m"
   echo "$base.webp  desktop $(du -h "$d" | cut -f1)  mobile $(du -h "$m" | cut -f1)"
   [ "$KEEP" = "--keep" ] || rm "$f"
 done
