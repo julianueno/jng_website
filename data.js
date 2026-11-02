@@ -156,8 +156,8 @@ window.SITE = {
     // },
     {
       id: 'riding', lane: 'tools', t: 2022.3,
-      title: 'Sabot', when: '2022', with: 'Centre for Research Architecture & IWGB ·  Ars Electronica Honorary Mention 2026',
-      text: 'An app repurposing delivery workers’ data into a digital commons.',
+      title: 'Sabot. Ars Electronica Honorary Mention', when: '2022', with: 'Centre for Research Architecture & Independent Workers of Great Britain ',
+      text: 'An app repurposing delivery workers’ data into a digital commons. In 2022, the project received a Generalitat Visual Arts grant. In 2026, the project recevied Ars Electronica Honorary Mention',
       img: 'images/sabot.png',
       links: [
         { label: 'Code', url: 'https://github.com/julianueno/Sabot' },
