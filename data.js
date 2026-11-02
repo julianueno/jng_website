@@ -35,7 +35,7 @@ window.SITE = {
   paths: [
     { id: 'commons', label: 'data commons', ids: ['unionism', 'rts', 'riding', 'engines', 'osmp', 'militant', 'vida', 'chisme'] },
     { id: 'forensic', label: 'forensic', ids: ['medical', 'humviol', 'attacks-aid', 'cartography', 'starvation', 'genocidios'] },
-    { id: 'ai-warfare', label: 'AI warfare', ids: ['waiting', 'hidden-casualties', 'taiba', 'shahed', 'thesis', 'humviol', 'patterns', 'recursive', 'target', 'cuadricula', 'genocidios'] },
+    { id: 'ai-warfare', label: 'AI weapons', ids: ['waiting', 'hidden-casualties', 'taiba', 'shahed', 'thesis', 'humviol', 'patterns', 'recursive', 'target', 'cuadricula', 'genocidios'] },
     { id: 'infrastructure', label: 'infrastructure', ids: ['energy', 'impluvium', 'rts', 'landlord', 'anyplace'] }
 
   ],
@@ -323,8 +323,8 @@ window.SITE = {
       rel: []
     },
     {
-      id: 'thesis', lane: 'writing', t: 2023.75, end: 2027.0,
-      title: 'Individuated Mass Killing', when: '2023–', with: 'PhD, Centre for Research Architecture, Goldsmiths',
+      id: 'thesis', lane: 'projects', t: 2023.75, end: 2026.7,
+      title: 'Individuated Mass Killing', when: '2023-', with: 'PhD, Centre for Research Architecture, Goldsmiths',
       text: 'A spatial method for reconstructing the Israeli military target factory in Gaza. In progress.',
       img: 'images/bombing_campaign.png',
       links: [],
