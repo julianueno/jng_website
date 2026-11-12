@@ -220,9 +220,9 @@ window.SITE = {
       title: 'Qualsevol Lloc / Anyplace', when: '2022', with: 'Arts Santa Mònica · with Noha Mokhtar and Xavier Nueno',
       text: 'Video installation on the work processes that sustain the reproduction of places and objects where mass tourism meets digital economies. Curated by Gema Darbo.',
       img: 'images/anyplace.webp',
-      video: 'https://vimeo.com/779206214',
+      video: 'https://vimeo.com/793836865',
       imgNote: 'video still, Mix Fruit',
-      links: [{ label: 'Watch Mix Fruit', url: 'https://vimeo.com/779206214' }],
+      links: [{ label: 'Watch Mix Fruit', url: 'https://vimeo.com/793836865' }],
       rel: []
     },
     {
