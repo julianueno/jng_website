@@ -1202,6 +1202,80 @@ a.org:hover {
   background: #000;
 }
 
+/* carousel: images cross-fade in a fixed frame, each shown whole */
+.frame.is-gallery {
+  background: var(--ink);
+}
+
+.frame.is-gallery>img.slide {
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.frame.is-gallery>img.slide.on {
+  opacity: 1;
+}
+
+.gal-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 18px;
+  border: 0;
+  background: rgba(26, 25, 23, 0.72);
+  color: var(--paper-2);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 160ms ease, background 160ms ease;
+}
+
+.gal-btn.prev {
+  left: 10px;
+}
+
+.gal-btn.next {
+  right: 10px;
+}
+
+.frame.is-gallery:hover .gal-btn,
+.gal-btn:focus-visible {
+  opacity: 1;
+}
+
+.gal-btn:hover {
+  background: var(--accent);
+}
+
+.gal-count {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  z-index: 2;
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-label);
+  padding: 6px 10px;
+  background: rgba(26, 25, 23, 0.82);
+  color: var(--paper-2);
+  pointer-events: none;
+}
+
+/* no hover on touch screens: keep the arrows visible */
+@media (hover: none) {
+  .gal-btn {
+    opacity: 1;
+  }
+}
+
 .play,
 .badge {
   position: absolute;
@@ -1707,7 +1781,8 @@ a.org:hover {
   }
 
   .entry-head,
-  .spine-img img {
+  .spine-img img,
+  .frame.is-gallery>img.slide {
     transition: none;
   }
 

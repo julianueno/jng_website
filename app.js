@@ -102,6 +102,7 @@
 
   // live = the project currently in view: loops and previews play. Others show their poster.
   function renderMedia(e, live) {
+    if (e.gallery && e.gallery.length) return renderGallery(e);
     var v = parseVideo(e.video), poster = posterOf(e);
     var alt = esc(e.imgNote || e.title);
     var contain = e.fit === 'contain';
@@ -132,8 +133,72 @@
 
   function mediaEl(id) { return $list.querySelector('[data-media="' + id + '"]'); }
 
+  /* ---------- carousel: entries with gallery: [...] show their images one at a time ----------
+     The frame keeps one proportion (galleryRatio, default 4:3) and every image is shown whole
+     inside it, so changing slide never makes the panel jump. */
+  function renderGallery(e) {
+    var n = e.gallery.length, alt = esc(e.imgNote || e.title);
+    var slides = e.gallery.map(function (p, i) {
+      return '<img class="slide' + (i === 0 ? ' on' : '') + '" src="' + esc(imgSrc(p)) + '" alt="' + alt + ', ' + (i + 1) + ' of ' + n + '"' +
+        (i === 0 ? '' : ' loading="lazy"') + (i === 0 ? '' : ' aria-hidden="true"') + '>';
+    }).join('');
+    var ctrl = n > 1 ?
+      '<button type="button" class="gal-btn prev" data-gal="-1" aria-label="Previous image"><span aria-hidden="true">←</span></button>' +
+      '<button type="button" class="gal-btn next" data-gal="1" aria-label="Next image"><span aria-hidden="true">→</span></button>' +
+      '<span class="gal-count" aria-live="polite"><span class="gal-i">1</span> / ' + n + '</span>' : '';
+    return '<div class="frame is-gallery" data-ratio="' + (e.galleryRatio || 4 / 3) + '" data-ms="' + (e.galleryInterval || 2500) + '" data-i="0">' + slides + ctrl + '</div>';
+  }
+  // the open project's carousel advances on its own (1.5 s per photo by default);
+  // it holds while the pointer is over it and restarts its count after a manual step
+  var galTimer = null, galFrame = null;
+  function stopGallery() { clearInterval(galTimer); galTimer = null; galFrame = null; }
+  function startGallery(frame) {
+    stopGallery();
+    if (!frame || reduceMotion || frame.querySelectorAll('img.slide').length < 2) return;
+    galFrame = frame;
+    // load every photo now so none arrives late mid-show
+    frame.querySelectorAll('img.slide').forEach(function (s) { s.loading = 'eager'; });
+    galTimer = setInterval(function () {
+      if (!galFrame || !galFrame.isConnected) { stopGallery(); return; }
+      if (document.hidden || galFrame.matches(':hover')) return;
+      galleryStep(galFrame, 1, true);
+    }, parseInt(frame.dataset.ms, 10) || 1500);
+  }
+  function galleryStep(frame, d, auto) {
+    if (!auto && frame === galFrame) startGallery(frame);
+    var slides = frame.querySelectorAll('img.slide'), n = slides.length;
+    if (n < 2) return;
+    var i = ((parseInt(frame.dataset.i, 10) || 0) + d + n) % n;
+    frame.dataset.i = i;
+    slides.forEach(function (s, k) {
+      s.classList.toggle('on', k === i);
+      if (k === i) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden', 'true');
+    });
+    // warm up the next one so it is ready when asked for
+    var nx = slides[(i + d + n) % n];
+    if (nx && nx.loading === 'lazy') nx.loading = 'eager';
+    var c = frame.querySelector('.gal-i');
+    if (c) c.textContent = i + 1;
+  }
+  // swipe on touch screens
+  (function () {
+    var sx = 0, sy = 0, fr = null;
+    document.addEventListener('touchstart', function (ev) {
+      fr = ev.target.closest && ev.target.closest('.frame.is-gallery');
+      if (!fr) return;
+      sx = ev.touches[0].clientX; sy = ev.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', function (ev) {
+      if (!fr) return;
+      var t = ev.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) galleryStep(fr, dx < 0 ? 1 : -1);
+      fr = null;
+    }, { passive: true });
+  })();
+
   function setLive(id) {
     if (liveId === id) return;
+    stopGallery();
     var old = liveId && mediaEl(liveId);
     if (old) old.innerHTML = renderMedia(byId[liveId], false);
     liveId = id;
@@ -143,6 +208,7 @@
     // browsers only autoplay video they know is muted; innerHTML doesn't always set that
     var vid = m.querySelector('video.loop');
     if (vid) { vid.muted = true; var p = vid.play(); if (p && p.catch) p.catch(function () { }); }
+    startGallery(m.querySelector('.frame.is-gallery'));
   }
 
   function playVideo(id) {
@@ -449,7 +515,7 @@
     if (!frame) return;
     var narrow = !!(window.matchMedia && window.matchMedia('(max-width: 860px)').matches);
     var natural = frame.classList.contains('is-natural');
-    var ratio = 16 / 9;
+    var ratio = parseFloat(frame.dataset.ratio) || 16 / 9;
     if (natural) {
       var m = frame.querySelector('img.still, video.loop');
       var nw = m && (m.naturalWidth || m.videoWidth), nh = m && (m.naturalHeight || m.videoHeight);
@@ -474,7 +540,7 @@
       panel.style.gridTemplateColumns = w + 'px minmax(0, 1fr)';
     }
     if (natural) { frame.style.height = ''; return; }
-    var h = Math.round(narrow ? w * 9 / 16 : Math.min(H, w * 9 / 16));
+    var h = Math.round(narrow ? w / ratio : Math.min(H, w / ratio));
     frame.style.height = h + 'px';
     // background videos are 16:9; keep them covering the frame whatever its proportion
     var ifr = frame.querySelector('iframe.bg');
@@ -770,6 +836,8 @@
     if (tg) { toggleEntry(tg.dataset.toggle); return; }
     var pl = t.closest('[data-play]');
     if (pl) { playVideo(pl.dataset.play); return; }
+    var gb = t.closest('[data-gal]');
+    if (gb) { galleryStep(gb.closest('.frame'), parseInt(gb.dataset.gal, 10)); return; }
     var pa = t.closest('[data-path]');
     if (pa) { setPath(state.path === pa.dataset.path ? null : pa.dataset.path, state.open); return; }
     var go = t.closest('[data-go]');

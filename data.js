@@ -14,6 +14,9 @@
     videoStart  optional: seconds into the video where the silent loop / player starts
     loop     optional: path to a short silent .mp4 in /images, autoplays on loop (FA-style)
     fit      optional: 'contain' to show the whole image instead of cropping (banners, posters)
+    gallery  optional: list of image paths shown as a carousel (arrows / swipe); img stays the thumbnail
+    galleryRatio  optional: proportion of the carousel frame (default 4/3)
+    galleryInterval  optional: milliseconds each photo shows before the next (default 1500)
     imgNote  shown in the placeholder until an image is added
     links    [{ label, url }]
     rel      ids of connected entries (connections work both ways automatically)
@@ -276,6 +279,13 @@ window.SITE = {
       title: 'Earthworks', when: '2026', with: 'Barcelona · World Congress of Architecture · Forensic Architecture ·Co-curation with Eyal Weizman and Lizzie Breiner',
       text: 'Earthworks brings together a selection of Forensic Architecture recent work on Israeli military conduct in Gaza, placing it into dialogue with Eyal Weizman and Rafi Segal’s censored publication, A Civilian Occupation: The Politics of Israeli Architecture, initially conceived for the 2002 World Congress in Berlin. Included works explore the relationship between destruction and construction in Israel’s establishment of military infrastructure for spatial control, with all new work on military earth berm typologies and a video based on Weizman and Segal’s original publication, digitised for the first time for this presentation. Gaza has become not only a demolition zone but a construction site, reshaped according to Israel’s blueprint. Military bulldozers have ripped through the fractured remains of buildings and refashioned the debris into hundreds of towering earth berms—the modular building blocks of a new necro-architecture designed to keep Palestinians under perpetual siege and dismantle the basic conditions of life in Gaza',
       img: 'images/earthworks.jpg',
+      gallery: [
+        'images/earthworks.jpg',
+        'images/earthworks-01.jpg', 'images/earthworks-02.jpg', 'images/earthworks-03.jpg',
+        'images/earthworks-04.jpg', 'images/earthworks-05.jpg', 'images/earthworks-06.jpg',
+        'images/earthworks-07.jpg', 'images/earthworks-08.jpg', 'images/earthworks-09.jpg',
+        'images/earthworks-10.jpg'
+      ],
       imgNote: 'exhibition view, Tres Xemeneies',
       links: [],
       rel: ['cartography']
@@ -406,7 +416,7 @@ window.SITE = {
     },
     {
       id: 'screenwalk', lane: 'writing', t: 2024.87,
-      title: 'Screenwalk. The Photographers’ Gallery', when: 'Nov 2024', with: 'The Photographers’ Gallery, London',
+      title: 'Screenwalk', when: 'Nov 2024', with: 'The Photographers’ Gallery, London',
       text: 'In this Screen Walk, Júlia Nueno Guitart, a Forensic Architecture researcher, presented a methodology to interrogate AI systems through spatial evidence, lived experience and media traces. She showcased how spatial analysis, testimonies and digital tools can be used to investigate AI, moving beyond the algorithm itself to explore how computational systems reshape environments, reorganise territories, and often amplify violence through automated decisions. This approach aims to interrogate the critical role of AI in transforming military strategies and its far-reaching consequences on the physical world.',
       video: 'https://www.youtube.com/watch?v=6s7GtSkapgY',
       imgNote: 'video still',
@@ -446,13 +456,13 @@ window.SITE = {
     },
     {
       id: 'degrees', lane: 'writing', t: 2026.39,
-      title: '4 degrees of simulation', when: 'Sep 2025', with: 'Institute of Postnatural Studies · Seminar coordinator',
+      title: '4 degrees of simulation.', when: 'Sep 2025', with: 'Institute of Postnatural Studies · Seminar coordinator',
       text: 'This seminar explores sensing as a political and contested practice of knowledge production. Perception is never neutral: infrastructures and techniques determine what is made visible or remains hidden, which claims are amplified or dismissed, whose lives are recognized, and which futures become imaginable. Sensing is thus inseparable from questions of access, recognition, and power.',
       img: 'images/simulation.jpg'
     },
     {
       id: 'tabakalera', lane: 'writing', t: 2026.85,
-      title: 'Algoritmo. Territorio. Población.', when: 'Nov 2026', with: 'Donostia · Tabakalera Medialab',
+      title: 'Algoritmo. Territorio. Población', when: 'Nov 2026', with: 'Donostia · Tabakalera Medialab',
       text: 'Performance lecture.',
       img: 'images/tabakalera.jpg',
       imgNote: 'performance lecture view',
