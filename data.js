@@ -34,9 +34,9 @@ window.SITE = {
 
   paths: [
     { id: 'commons', label: 'data commons', ids: ['unionism', 'rts', 'riding', 'engines', 'osmp', 'militant', 'vida', 'chisme'] },
-    { id: 'forensic', label: 'forensic', ids: ['medical', 'humviol', 'attacks-aid', 'cartography', 'screenwalk', 'starvation', 'genocidios'] },
-    { id: 'ai-warfare', label: 'AI weapons', ids: ['waiting', 'hidden-casualties', 'taiba', 'shahed', 'thesis', 'humviol', 'patterns', 'recursive', 'target', 'screenwalk', 'cuadricula', 'genocidios'] },
-    { id: 'infrastructure', label: 'infrastructure', ids: ['energy', 'impluvium', 'rts', 'landlord', 'anyplace'] }
+    { id: 'forensic', label: 'forensic', ids: ['medical', 'humviol', 'attacks-aid', 'cartography', 'screenwalk', 'starvation', 'genocidios', 'earthworks'] },
+    { id: 'ai-warfare', label: 'AI weapons', ids: ['waiting', 'hidden-casualties', 'taiba', 'shahed', 'thesis', 'humviol', 'patterns', 'recursive', 'target', 'screenwalk', 'cuadricula', 'genocidios', 'tabakalera'] },
+    { id: 'infrastructure', label: 'infrastructure', ids: ['energy', 'impluvium', 'rts', 'landlord', 'anyplace', 'fora_de_Si'] }
 
   ],
 
@@ -449,6 +449,15 @@ window.SITE = {
       title: '4 degrees of simulation', when: 'Sep 2025', with: 'Institute of Postnatural Studies · Seminar coordinator',
       text: 'This seminar explores sensing as a political and contested practice of knowledge production. Perception is never neutral: infrastructures and techniques determine what is made visible or remains hidden, which claims are amplified or dismissed, whose lives are recognized, and which futures become imaginable. Sensing is thus inseparable from questions of access, recognition, and power.',
       img: 'images/simulation.jpg'
+    },
+    {
+      id: 'tabakalera', lane: 'writing', t: 2026.85,
+      title: 'Algoritmo. Territorio. Población.', when: 'Nov 2026', with: 'Donostia · Tabakalera Medialab',
+      text: 'Performance lecture.',
+      img: 'images/tabakalera.jpg',
+      imgNote: 'performance lecture view',
+      links: [],
+      rel: ['thesis', 'cartography', 'screenwalk']
     }
   ]
 };
