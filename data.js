@@ -34,8 +34,8 @@ window.SITE = {
 
   paths: [
     { id: 'commons', label: 'data commons', ids: ['unionism', 'rts', 'riding', 'engines', 'osmp', 'militant', 'vida', 'chisme'] },
-    { id: 'forensic', label: 'forensic', ids: ['medical', 'humviol', 'attacks-aid', 'cartography', 'starvation', 'genocidios'] },
-    { id: 'ai-warfare', label: 'AI weapons', ids: ['waiting', 'hidden-casualties', 'taiba', 'shahed', 'thesis', 'humviol', 'patterns', 'recursive', 'target', 'cuadricula', 'genocidios'] },
+    { id: 'forensic', label: 'forensic', ids: ['medical', 'humviol', 'attacks-aid', 'cartography', 'screenwalk', 'starvation', 'genocidios'] },
+    { id: 'ai-warfare', label: 'AI weapons', ids: ['waiting', 'hidden-casualties', 'taiba', 'shahed', 'thesis', 'humviol', 'patterns', 'recursive', 'target', 'screenwalk', 'cuadricula', 'genocidios'] },
     { id: 'infrastructure', label: 'infrastructure', ids: ['energy', 'impluvium', 'rts', 'landlord', 'anyplace'] }
 
   ],
@@ -403,6 +403,15 @@ window.SITE = {
       imgNote: 'pull quote',
       links: [{ label: 'Read', url: 'https://www.versobooks.com/en-gb/blogs/news/the-target-factory' }],
       rel: ['genocidios']
+    },
+    {
+      id: 'screenwalk', lane: 'writing', t: 2024.87,
+      title: 'Screenwalk. The Photographers’ Gallery', when: 'Nov 2024', with: 'The Photographers’ Gallery, London',
+      text: 'In this Screen Walk, Júlia Nueno Guitart, a Forensic Architecture researcher, presented a methodology to interrogate AI systems through spatial evidence, lived experience and media traces. She showcased how spatial analysis, testimonies and digital tools can be used to investigate AI, moving beyond the algorithm itself to explore how computational systems reshape environments, reorganise territories, and often amplify violence through automated decisions. This approach aims to interrogate the critical role of AI in transforming military strategies and its far-reaching consequences on the physical world.',
+      video: 'https://www.youtube.com/watch?v=6s7GtSkapgY',
+      imgNote: 'video still',
+      links: [{ label: 'Watch', url: 'https://www.youtube.com/watch?v=6s7GtSkapgY' }],
+      rel: ['humviol', 'medical', 'attacks-aid', 'cartography', 'target']
     },
     {
       id: 'cuadricula', lane: 'writing', t: 2025.77,
